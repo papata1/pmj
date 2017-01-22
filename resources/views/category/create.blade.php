@@ -5,10 +5,10 @@
 <div class="container">
        <div class="row">
            <div class="col-md-8 col-md-offset-2">.
-               <h1 class="page-header">ตั้งค่าแอดมิน</h1>
+               <h1 class="page-header">จัดการเรื่องรับบริการ</h1>
                <div class="panel panel-default">
 
-                   <div class="panel-heading">สมาชิก</div>
+                   <div class="panel-heading"></div>
 
                    <div class="panel-body">
 
@@ -26,7 +26,7 @@
                                   </div>
                                     <div class="form-group">
                                         {!! Form::button('เพิ่ม',['type'=>'submit','class'=>'btn btn-primary']) !!}
-                                        {{ link_to_route('user.index','ย้อนกลับ',null,['class'=>'btn btn-danger']) }}
+                                        {{ link_to_route('category.index','ย้อนกลับ',null,['class'=>'btn btn-danger']) }}
                                     </div>
                                 {!! Form::close() !!}
                    </div>

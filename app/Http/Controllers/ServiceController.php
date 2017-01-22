@@ -61,9 +61,9 @@ class ServiceController extends Controller
        return redirect()->route('service.index')->with('message','item has been updated successfully');
    }
 
-     public function destroy(Place $place)
+     public function destroy(Service $service)
      {
-        $place->delete();
-        return redirect()->route('place.index')->with('message','item has been deleted successfully');
+        $service->delete();
+        return redirect()->route('service.index')->with('message','item has been deleted successfully');
      }
 }

@@ -43,12 +43,12 @@ class CategoryController extends Controller
 
      }
 
-     public function edit(Place $place)
+     public function edit(Category $category)
     {
-        return view('place.edit',compact('place'));
+        return view('category.edit',compact('category'));
     }
 
-    public function update(DeRequest $request,Place $place)
+    public function update(CategoryRequest $request,category $category)
    {
     //  $affectedRows = de::where('id',$de->id)->update(['name' => $de->name,'email' => $de->email,'role' => $de->role ]);
       /*$ue =   DB::table('des')
@@ -56,13 +56,13 @@ class CategoryController extends Controller
          ->update(['name' => $de->name,'email' => $de->email,'role' => $de->role  ]
 
        );*/
-       $place->update($request->all());
-       return redirect()->route('place.index')->with('message','item has been updated successfully');
+       $category->update($request->all());
+       return redirect()->route('category.index')->with('message','item has been updated successfully');
    }
 
-     public function destroy(Place $place)
+     public function destroy(Category $category)
      {
-        $place->delete();
-        return redirect()->route('place.index')->with('message','item has been deleted successfully');
+        $category->delete();
+        return redirect()->route('category.index')->with('message','item has been deleted successfully');
      }
 }

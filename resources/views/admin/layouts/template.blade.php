@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme Modify by Saimok</title>
+    <title>ระบบจัดการเอกสาร พมจ. อุบลราชธานี</title>
 
     <!-- Bootstrap Core CSS -->
     @include('admin.layouts.inc-stylesheet')
@@ -28,7 +28,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href={{ action('HomeController@index')}}>ระบบกองทุนผู้สูงอายุ</a>
+                <a class="navbar-brand" href={{ action('HomeController@index')}}>ระบบจัดการเอกสาร พมจ. อุบลราชธานี</a>
             </div>
             <!-- /.navbar-header -->
 

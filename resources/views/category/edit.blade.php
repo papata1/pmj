@@ -5,32 +5,28 @@
 <div class="container">
        <div class="row">
            <div class="col-md-8 col-md-offset-2">.
-               <h1 class="page-header">ตั้งค่าแอดมิน</h1>
+               <h1 class="page-header">จัดการเรื่องรับบริการ</h1>
                <div class="panel panel-default">
 
-                   <div class="panel-heading">สมาชิก</div>
+                   <div class="panel-heading"></div>
 
                    <div class="panel-body">
 
 
-                     {!! Form::model($user,array('route'=>['user.update',$user->id],'method'=>'PUT')) !!}
+                     {!! Form::model($category,array('route'=>['category.update',$category->id],'method'=>'PUT')) !!}
 
 
                                     <div class="form-group">
-                                        {!! Form::label('name','ชื่อ') !!}
-                                        {!! Form::text('name',null,['class'=>'form-control']) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::label('email','อีเมล') !!}
-                                        <p>{{$user->email}}</p>
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::label('role','สถานะ') !!}
-                                        {!! Form::select('role',array('Super Admin' => 'Super Admin', 'Admin' => 'Admin'), null,['class'=>'form-control']) !!}
-                                    </div>
+                                      {!! Form::label('name','ลักษณะงาน') !!}
+                                      {!! Form::text('name',null,['class'=>'form-control']) !!}
+                                  </div>
+                                  <div class="form-group">
+                                      {!! Form::label('remark','ประเภทงาน') !!}
+                                      {!! Form::text('remark',null,['class'=>'form-control']) !!}
+                                  </div>
                                     <div class="form-group">
                                         {!! Form::button('บันทึก',['type'=>'submit','class'=>'btn btn-primary']) !!}
-                                        {{ link_to_route('user.index','ย้อนกลับ',null,['class'=>'btn btn-danger']) }}
+                                        {{ link_to_route('category.index','ย้อนกลับ',null,['class'=>'btn btn-danger']) }}
                                     </div>
                                 {!! Form::close() !!}
 

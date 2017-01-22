@@ -58,8 +58,9 @@
                                                         <td>{{ $user->year}}  </td>
                                                             <td>
                                                             {!! Form::open(array('route'=>['service.destroy',$user->id],'method'=>'DELETE')) !!}
-                                                            {{ link_to_route('service.edit','',[$user->id],['class'=>'btn btn-info fa fa-arrow-circle-right']) }}
-                                                            {!! Form::button('',['class'=>'btn btn-default fa fa-print','type'=>'submit']) !!}
+                                                            {{ link_to_route('service.edit','',[$user->id],['class'=>'btn btn-info glyphicon glyphicon-edit ']) }}
+                                                            {!! Form::button('',['class'=>'btn btn-danger glyphicon glyphicon-remove-sign del','type'=>'submit']) !!}
+                                                            <a herf='#' class='btn btn-default fa fa-print'></a>
                                                             {!! Form::close() !!}
                                                             </td>
                                                     </tr>

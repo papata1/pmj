@@ -27,6 +27,7 @@
                                         <th>ลำดับ</th>
                                         <th>ลักษณะงาน</th>
                                         <th>ประเภทงาน</th>
+                                         <th>การจัดการ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -35,6 +36,12 @@
                             <td>{{ $user->id}}  </td>
                             <td>{{ $user->name}}  </td>
                             <td>{{ $user->remark}}  </td>
+                             <td>
+                            {!! Form::open(array('route'=>['category.destroy',$user->id],'method'=>'DELETE')) !!}
+                            {{ link_to_route('category.edit','',[$user->id],['class'=>'btn btn-info glyphicon glyphicon-edit ']) }}
+                             {!! Form::button('',['class'=>'btn btn-danger glyphicon glyphicon-remove-sign del','type'=>'submit']) !!}
+                                   {!! Form::close() !!}
+                            </td>
                            </tr>
                                     @endforeach
                                 </tbody>

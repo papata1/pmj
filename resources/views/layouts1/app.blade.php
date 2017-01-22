@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>ระบบจัดการเอกสาร พมจ. อุบลราชธานีเหกเ</title>
 
     <!-- Styles -->
     <link href="../public/css/app.css" rel="stylesheet">
@@ -35,8 +35,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                    <a class="navbar-brand" href="{{ url('/') }}" >
+                        ระบบจัดการเอกสาร พมจ. อุบลราชธานี
                     </a>
                 </div>
 
