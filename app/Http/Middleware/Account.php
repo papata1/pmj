@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Roles
+class Account
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class Roles
     {
         //$role = Auth::role();
         $user = $request->user();
-        if($user&&$user->role=='1'){
+        if($user&&$user->account=='1'){
             return $next($request);
         }
         abort(403);

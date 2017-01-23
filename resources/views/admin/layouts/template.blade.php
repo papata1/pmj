@@ -69,9 +69,13 @@
 <script type="text/javascript">
   $(document).ready(function() {
 
+      $('#reset').click(function() {
+            location.reload();
+        });
+
      $('#dataTables-example').DataTable({
           responsive: true
-     });
+        });
 
      $('#dataTables-example').on('click', '.del', function() {
           var x = confirm("ต้องการลบใช่ไหม?");
@@ -82,7 +86,7 @@
           event.preventDefault();
                 return false;
             }
-        });
+         });
 
   });
 

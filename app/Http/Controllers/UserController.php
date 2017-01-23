@@ -17,7 +17,11 @@ class UserController extends Controller
 {
   public function __construct()
   {
-    //  $this->middleware('auth');
+    // $this->middleware('rent');
+    // $this->middleware('project');
+   //   $this->middleware('account');
+    //    $this->middleware('debt');
+    //     $this->middleware('process');
       $this->middleware('roles');
   }
     public function index(){
@@ -31,13 +35,16 @@ class UserController extends Controller
     public function store(User2Request $request)
      {
        //user::create($request->all());
-       //return redirect()->route('user.index')->with('message','item has been added successfully');
-
      $u = User::create([
            'name' => $request['name'],
            'email' => $request['email'],
             'role' => $request['role'],
            'password' => bcrypt($request['password']),
+           'rent' => $request['rent'],
+           'project' => $request['project'],
+           'account' => $request['account'],
+           'debt' => $request['debt'],
+           'process' => $request['process'],
 
        ]);
         return redirect()->route('user.index')->with('message','item has been added successfully');

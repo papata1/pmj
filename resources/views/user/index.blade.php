@@ -3,9 +3,7 @@
 @section('content')
 <class="container">
   			<div class="form-group"><h1 class="page-header">ตั้งค่าแอดมิน</h1></div>
-    @if(Session::has('message'))
-<div class="alert alert-success">{{ Session::get('message') }}</div>
-@endif
+   
 <p>
 </p>
 <div class="bs-example" data-example-id="bordered-table">.
@@ -13,7 +11,7 @@
         <div class="col-lg-12">
 <div class="panel panel-default" >
     <div class="panel-heading">
-        <div class="col-lg-2">ตารางสมาชิก</div><div class="col-lg-9"></div>{{ link_to_route('user.create','เพิ่ม ',null,['class'=>'btn btn-success']) }}
+        <div class="col-lg-2">ตารางสมาชิก</div><div class="col-lg-8"></div>{{ link_to_route('user.create','เพิ่มแอคเคาท์ ',null,['class'=>'btn btn-success']) }}
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="margin-right:20px;">
@@ -23,7 +21,7 @@
               <th>ลำดับ</th>
                 <th>ชื่อ</th>
                 <th>อีเมลล์</th>
-                <th>ตำแหน่ง</th>
+                <th>อำนาจแก้ไข</th>
                 <th>จัดการ</th>
             </tr>
               </thead>
@@ -33,7 +31,27 @@
                      <td>{{ $user->id}}  </td>
                      <td>{{ $user->name}}  </td>
                      <td>{{ $user->email}}  </td>
-                    <td>{{ $user->role}}  </td>
+                    <td>
+                    @if($user->role != 1)
+                        @if($user->rent == 1)
+                        &nbsp;&nbsp;งานกู้ยืมเงินกองทุนผู้สูงอายุ&nbsp;&nbsp;
+                        @endif  
+                        @if($user->project == 1)
+                        &nbsp;&nbsp;งานโครงการขอรับการสนับสนุน&nbsp;&nbsp;
+                        @endif  
+                        @if($user->account == 1)
+                        &nbsp;&nbsp;งานบัญชี&nbsp;&nbsp;
+                        @endif 
+                        @if($user->project == 1)
+                        &nbsp;&nbsp;งานติดตามถามทวงหนี้&nbsp;&nbsp;
+                        @endif 
+                        @if($user->process == 1)
+                        &nbsp;&nbsp;ประมวลผลกองทุน&nbsp;&nbsp;
+                        @endif 
+                    @else
+                    &nbsp;&nbsp;Super Admin&nbsp;&nbsp;
+                    @endif
+                    </td>
                          <td>
                            {!! Form::open(array('route'=>['user.destroy',$user->id],'method'=>'DELETE')) !!}
                         {{ link_to_route('user.edit','',[$user->id],['class'=>'btn btn-info glyphicon glyphicon-edit']) }}

@@ -311,7 +311,7 @@
 
 
                                       <div class="form-group col-lg-12" >
-                                        {{ link_to_route('service.edit','ค่าเริ่มต้น',null,['class'=>'btn btn-danger']) }}                                       
+                                        <button type="button" id="reset" class="btn btn-danger" >ค่าเริ่มต้น</button>                                    
                                         {!! Form::button('บันทึก',['type'=>'submit','class'=>'btn btn-primary','id'=>'add1']) !!}
                                       </div>
 
