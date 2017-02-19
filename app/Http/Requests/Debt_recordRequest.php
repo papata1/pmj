@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Category;
+use App\debt_record;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class Debt_recordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,6 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
 
         ];
     }

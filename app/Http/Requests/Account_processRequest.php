@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Category;
+use App\account_process;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class Account_processRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,6 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
 
         ];
     }
