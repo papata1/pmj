@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\loan_info;
 use Illuminate\Foundation\Http\FormRequest;
 
-class Loan_info extends FormRequest
+class Loan_infoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

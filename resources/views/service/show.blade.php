@@ -45,7 +45,7 @@
 
                                      <div class="form-group col-lg-6">
                                            <label>สถานะการดำเนินการ</label>
-                                           <input class="form-control" name="process" id="process" value="{{$service->process}}" type="text" placeholder="">
+                                           <input class="form-control" name="status" id="status" value="{{$service->process}}" type="text" placeholder="">
                                     </div>
                                        <div class="col-lg-12">
                                        <h4 style="font-weight:bold;">ข้อมูลผู้ขอเข้ารับบริการ</h4>
@@ -295,12 +295,6 @@
 
 
 
-                                      <div class="form-group col-lg-12" >
-                                        <button type="button" id="reset" class="btn btn-danger" >ค่าเริ่มต้น</button>                                    
-                                        {!! Form::button('บันทึก',['type'=>'submit','class'=>'btn btn-primary','id'=>'add1']) !!}
-                                      </div>
-
-
                                     {!! Form::close() !!}
 
 
@@ -329,82 +323,7 @@
 <script>
     $(document).ready(function() {
         //alert('aa');
-                 $('.check').on('click',function(){
-              $(".checkedinput").val('');
-              $(".checkedinput").prop('disabled', true);
-          });
-          $('.checked').on('click',function(){
-              $(".checkedinput").prop('disabled', false);
-          });
-        $('#id_exp1').on('click',function(){
-             if ($("#id_exp").prop("disabled")){
-              $("#id_exp").prop('disabled', false);
-              }else{
-              $("#id_exp").val('');
-              $("#id_exp").prop('disabled', true);
-              }
-          });
-           $('#id_exp2').on('click',function(){
-             if ($("#id_exp2").prop("disabled")){
-              $("#id_exp3").prop('disabled', false);
-              }else{
-              $("#id_exp3").val('');
-              $("#id_exp3").prop('disabled', true);
-              }
-          });
-           $('#live_status1').on('click',function(){
-              $('.c').val(1);
-              $("#live_status12").prop('disabled', false);
-              $("#live_status14").prop('disabled', true);
-              $("#live_status14").val('');
-              $("#live_status13").prop('disabled', true);
-              $("#live_status13").val('');
-          });
-          $('#live_status11').on('click',function(){
-              $('.c').val(2);
-              $("#live_status13").prop('disabled', false);
-              $("#live_status12").prop('disabled', true);
-              $("#live_status14").prop('disabled', true);
-              $("#live_status14").val('');
-              $("#live_status12").val('');
-          });
-           $('#live_status111').on('click',function(){
-              $('.c').val(3);
-              $("#live_status14").prop('disabled', false);
-              $("#live_status13").prop('disabled', true);
-              $("#live_status13").val('');
-              $("#live_status12").prop('disabled', true);
-              $("#live_status12").val('');
-          });
-          $('.live_status').on('click',function(){
-              $('.c').val($(this).val());
-              $("#live_status14").prop('disabled', true);
-              $("#live_status14").val('');
-              $("#live_status13").prop('disabled', true);
-              $("#live_status13").val('');
-              $("#live_status12").prop('disabled', true);
-              $("#live_status12").val('');
-          });
-
-           $('#live_cate1').on('click',function(){
-              $("#live_cate11").prop('disabled', false);
-          });
-           $('.live_cate').on('click',function(){
-              $("#live_cate11").val('');
-              $("#live_cate11").prop('disabled', true);
-          });
-          
-          $('#prefix1').on('click',function(){
-              $("#prefix11").prop('disabled', false);
-          });
-           $('.prefix').on('click',function(){
-              $("#prefix11").val('');
-              $("#prefix11").prop('disabled', true);
-          });
-
-           $('#add1').click(function () {
-              $('#c_live_status').val($('.c').val());
-        });
+        $('.panel-body').find('input, textarea, button, select').attr('disabled','disabled');
 
     });
 

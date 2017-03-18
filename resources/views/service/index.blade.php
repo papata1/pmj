@@ -42,7 +42,7 @@
                                                <tr>
                                                    <th>รหัสบัตรประชาชน</th>
                                                    <th>ชื่อ-นามสกุล</th>
-                                                   <th>ประเภทงาน</th>
+                                                  <!-- <th>ประเภทงาน</th> !-->
                                                    <th>ลักษณะ</th>
                                                    <th>สถานะดำเนินการ</th>
                                                    <th>วันที่ยื่น</th>
@@ -53,12 +53,13 @@
                                                     <tr>
                                                         <td>{{ $user->id_p}}  </td>
                                                         <td>{{ $user->name}} {{ $user->surename}}  </td>
-                                                        <td>{{ $user->status}}  </td>
+                                                    
                                                         <td>{{ $user->date}}  </td>
                                                         <td>{{ $user->year}}  </td>
                                                             <td>
-                                                            {!! Form::open(array('route'=>['service.destroy',$user->id],'method'=>'DELETE')) !!}
-                                                            {{ link_to_route('service.edit','',[$user->id],['class'=>'btn btn-info glyphicon glyphicon-edit ']) }}
+                                                            {!! Form::open(array('route'=>['service.destroy',$user->id_rela],'method'=>'DELETE')) !!}
+                                                            {{ link_to_route('service.show','',[$user->id_rela],['class'=>'btn btn-info glyphicon glyphicon-edit ']) }}
+                                                            {{ link_to_route('service.edit','',[$user->id_rela],['class'=>'btn btn-info glyphicon glyphicon-edit ']) }}
                                                             {!! Form::button('',['class'=>'btn btn-danger glyphicon glyphicon-remove-sign del','type'=>'submit']) !!}
                                                             <a herf='#' class='btn btn-default fa fa-print'></a>
                                                             {!! Form::close() !!}

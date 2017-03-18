@@ -48,22 +48,12 @@
 
                                       <div class="form-group col-lg-6">
                                             <label>ประเภท/ลักษณะงานที่มาขอรับบริการ</label>
-                                            <select id="category" name="category" class="form-control">
-                                              <option value="">------เลือกงานที่ขอเข้ารับบริการ------</option>
-                                              <option value="a">งานคนพิการ</option>
-                                              <option value="b">งานผู้สูงอายุ</option>
-                                              <option  value="c">งานอาสาสมัคร</option>
-                                              <option value="d">งานเด็กและเยาวชน</option>
-                                              <option value="e">งานการขอรับการสงเคราะห์</option>
-                                              <option value="f">งานกองทุน</option>
-                                              <option value="g">งานการให้คำปรึกษาแนะนำ</option>
-                                              <option value="h">อื่นๆ</option>
-                                            </select>
+                                  {!! Form::select('cat', [''=>''] + $dd, null, ['class' => 'form-control datar']) !!}
                             		   	 </div>
 
                                      <div class="form-group col-lg-6">
                                            <label>สถานะการดำเนินการ</label>
-                                           <input class="form-control" name="status" id="status" type="text" placeholder="">
+                                           <input class="form-control" name="process" id="process" type="text" placeholder="">
                                     </div>
                                        <div class="col-lg-12">
                                        <h4 style="font-weight:bold;">ข้อมูลผู้ขอเข้ารับบริการ</h4>
@@ -79,7 +69,7 @@
                                        <div class="col-lg-6">
                                            <label>บัตรหมดอายุวันที่</label>
                                            <input type="date"  id="id_exp" name="id_exp"/>&nbsp;&nbsp;
-                                           <input type="radio" id="id_exp" name="id_exp" value="ตลอดชีวิต" />
+                                           <input type="checkbox" id="id_exp1" name="id_exp" value="ตลอดชีวิต"  />
                                            <span>ตลอดชีวิต</span>
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
@@ -103,17 +93,13 @@
 
                                        <label class="col-lg-2 ">ว/ด/ป เกิด</label>
                                        <input type="date" class="col-lg-3" id="dob" name="dob" />
-                                       <label  class="col-lg-2 text-right">อายุ</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="age" name="age"/>
-                                       </div>
                                        <div class="col-lg-12"> <br />  </div>
 
 
                                        <label class="col-lg-12 " style="color:blue">ที่อยู่ปัจจุบัน</label>
                                        <div class="col-lg-12"> <br />  </div>
                                        <label class="col-lg-2 ">บ้านเลขที่</label>
-                                       <input type="text" class="col-lg-3" id="house_number" name="house_number" />
+                                       <input type="text" class="col-lg-3" id="address" name="address" />
                                        <label  class="col-lg-2 text-right">หมู่บ้าน/อาคาร</label>
                                        <div class="col-lg-5">
                                        <input type="text" class="col-lg-8" id="village" name="village"/>
@@ -129,7 +115,7 @@
                                        <div class="col-lg-12"> <br />  </div>
 
                                        <label class="col-lg-2 ">หมู่ที่</label>
-                                       <input type="text" class="col-lg-3" id="bloc" name="bloc" />
+                                       <input type="text" class="col-lg-3" id="bloc" name="group_home" />
                                        <label  class="col-lg-2 text-right">ซอย</label>
                                        <div class="col-lg-5">
                                        <input type="text" class="col-lg-8" id="allet" name="alley" />
@@ -140,7 +126,7 @@
                                        <input type="text" class="col-lg-3" id="road" name="road" />
                                        <label  class="col-lg-2 text-right">ตำบล/แขวง</label>
                                        <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="zone" name="zone" />
+                                       <input type="text" class="col-lg-8" id="local" name="local" />
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
 
@@ -169,7 +155,7 @@
 
                                        <div class="col-lg-12"> <br />  </div>
                                        <label class="col-lg-2 ">บ้านเลขที่</label>
-                                       <input type="text" class="col-lg-3" id="house_number1" name="house_number" />
+                                       <input type="text" class="col-lg-3" id="house_number1" name="address1" />
                                        <label  class="col-lg-2 text-right">หมู่บ้าน/อาคาร</label>
                                        <div class="col-lg-5">
                                        <input type="text" class="col-lg-8" id="village1" name="village1" />
@@ -185,7 +171,7 @@
                                        <div class="col-lg-12"> <br />  </div>
 
                                        <label class="col-lg-2 ">หมู่ที่</label>
-                                       <input type="text" class="col-lg-3" id="bloc1" name="bloc1" />
+                                       <input type="text" class="col-lg-3" id="bloc1" name="group_home1" />
                                        <label  class="col-lg-2 text-right">ซอย</label>
                                        <div class="col-lg-5">
                                        <input type="text" class="col-lg-8" id="alley1" name="alley1" />
@@ -196,7 +182,7 @@
                                        <input type="text" class="col-lg-3" id="road1" name="road1" />
                                        <label  class="col-lg-2 text-right">ตำบล/แขวง</label>
                                        <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="zone1" name="zone1" />
+                                       <input type="text" class="col-lg-8" id="local1" name="local1" />
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
 
@@ -259,8 +245,8 @@
                                        </div>
                                        <div class="col-lg-6">
                                            <label>บัตรหมดอายุวันที่</label>
-                                           <input type="date"  id="id_exp1" name="id_exp1" />&nbsp;&nbsp;
-                                           <input type="radio" id="id_exp1" name="id_exp1" value="ตลอดชีวิต" />
+                                           <input type="date"  id="id_exp3" name="id_exp1" />&nbsp;&nbsp;
+                                           <input type="checkbox" id="id_exp2" name="id_exp1" value="ตลอดชีวิต" />
                                            <span>ตลอดชีวิต</span>
 
                                        </div>
@@ -332,6 +318,7 @@
 
                 //              alert(5);
 
+              var a;  
 
           $('.check').on('click',function(){
               $(".checkedinput").val('');
@@ -348,6 +335,26 @@
               $("#live_status14").val('');
               $("#live_status13").prop('disabled', true);
               $("#live_status13").val('');
+          });
+         $('#id_exp1').on('click',function(){
+              if(a==1){
+              $("#id_exp").prop('disabled', false);
+              a = 0 ;
+              }else{
+              $("#id_exp").val('');
+              $("#id_exp").prop('disabled', true);
+              a = 1;
+              }
+          });
+          $('#id_exp2').on('click',function(){
+              if(a==1){
+              $("#id_exp3").prop('disabled', false);
+              a = 0 ;
+              }else{
+              $("#id_exp3").val('');
+              $("#id_exp3").prop('disabled', true);
+              a = 1;
+              }
           });
           $('#live_status11').on('click',function(){
                $('.c').val(2);
