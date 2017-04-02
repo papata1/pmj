@@ -48,7 +48,7 @@
 
                                       <div class="form-group col-lg-6">
                                             <label>ประเภท/ลักษณะงานที่มาขอรับบริการ</label>
-                                  {!! Form::select('cat', [''=>''] + $dd, null, ['class' => 'form-control datar']) !!}
+                                    {!! Form::select('cat', ['0'=>''] + $dd, null, ['class' => 'form-control datar']) !!}
                             		   	 </div>
 
                                      <div class="form-group col-lg-6">
@@ -64,7 +64,6 @@
                                        <div class="col-lg-6">
                                            <label>เลขบัตรประชาชนประจำตัว</label>
                                            <input type="text" id="id_p" name="id_p" />
-                                           <input type="button" value="ตรวจสอบกับระบบ" />
                                        </div>
                                        <div class="col-lg-6">
                                            <label>บัตรหมดอายุวันที่</label>
@@ -241,7 +240,6 @@
                                        <div class="col-lg-6">
                                            <label>เลขบัตรประชาชนประจำตัว</label>
                                            <input type="text" id="id_p1" name="id_p1" />
-                                           <input type="button" value="ตรวจสอบกับระบบ" />
                                        </div>
                                        <div class="col-lg-6">
                                            <label>บัตรหมดอายุวันที่</label>
@@ -280,6 +278,9 @@
 
 
                                  {!! Form::hidden('c_live_status', null,['id' => 'c_live_status']) !!}
+                                 {!! Form::hidden('category', null,['id' => 'category']) !!}
+                                 {!! Form::hidden('class', null,['id' => 'class']) !!}
+
 
 
                                       <div class="form-group col-lg-12" >
@@ -400,6 +401,8 @@
 
          $('#add1').click(function () {
               $('#c_live_status').val($('.c').val());
+              $('#category').val(1);
+               $('#category').val('id');
         });
 
     });

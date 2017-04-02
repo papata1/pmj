@@ -40,7 +40,7 @@
 
                                       <div class="form-group col-lg-6">
                                             <label>ประเภท/ลักษณะงานที่มาขอรับบริการ</label>
-                                            {!! Form::select('cat', [''=>''] + $dd, null, ['class' => 'form-control datar']) !!}
+                                            {!! Form::select('cat', ['0'=>''] + $dd, null, ['class' => 'form-control datar']) !!}
                             		   	 </div>
 
                                      <div class="form-group col-lg-6">
@@ -143,9 +143,9 @@
 
                                        <label class="col-lg-2 " style="color:blue">ที่อยู่ตามทะเบียนบ้าน</label>
                                        <div class="col-lg-10">
-                                       <input type="radio" id="check_live" name="check_live" value="ที่เดี่ยวกับบัตรประชาชน" @if($service->check_live=='ที่เดี่ยวกับบัตรประชาชน')disabled="disabled"@endif/><span> ที่เดี่ยวกับบัตรประชาชน&nbsp;&nbsp;</span>
+                                       <input type="radio" id="check_live" name="check_live" value="ที่เดี่ยวกับบัตรประชาชน" @if($service->check_live=='ที่เดี่ยวกับบัตรประชาชน')checked="checked"@endif/><span> ที่เดี่ยวกับบัตรประชาชน&nbsp;&nbsp;</span>
                                        <input type="radio" id="check_live" name="check_live" value="ที่เดียวกับที่ปัจจุบัน" @if($service->check_live=='ที่เดียวกับที่ปัจจุบัน')checked="checked"@endif/><span> ที่เดียวกับที่ปัจจุบัน&nbsp;&nbsp;</span>
-                                       <input type="radio" id="check_live" name="check_live" value="อื่นๆ" /><span> อื่นๆ&nbsp;&nbsp;</span>
+                                       <input type="radio" id="check_live" name="check_live" value="อื่นๆ" @if($service->check_live=='อื่นๆ')checked="checked"@endif/><span> อื่นๆ&nbsp;&nbsp;</span>
                                        </div>
 
                                        <div class="col-lg-12"> <br />  </div>
@@ -254,7 +254,7 @@
                                            <input type="text" id="id_p1" name="id_p1" value="{{$ser1->id_p}}" />                                       </div>
                                        <div class="col-lg-6">
                                            <label>บัตรหมดอายุวันที่</label>
-                                           <input type="date"  id="id_exp3" name="id_exp1" value="{{$ser1->id_exp}}"@if($ser->id_exp=='ตลอดชีวิต')  disabled="disabled"@endif/>&nbsp;&nbsp;
+                                           <input type="date"  id="id_exp3" name="id_exp1" value="{{$ser1->id_exp}}"@if($ser1->id_exp=='ตลอดชีวิต')  disabled="disabled"@endif/>&nbsp;&nbsp;
                                            <input type="checkbox" id="id_exp2" name="id_exp1"  value="ตลอดชีวิต" @if($ser1->id_exp=='ตลอดชีวิต')  checked="checked"@endif/>
                                            <span>ตลอดชีวิต</span>
 
@@ -292,6 +292,7 @@
 
 
                                  {!! Form::hidden('c_live_status', null,['id' => 'c_live_status']) !!}
+                                 {!! Form::hidden('category', null,['id' => 'category']) !!}
 
 
 
@@ -404,6 +405,7 @@
 
            $('#add1').click(function () {
               $('#c_live_status').val($('.c').val());
+              $('#category').val(1);
         });
 
     });

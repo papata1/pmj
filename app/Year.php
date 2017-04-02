@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Ask extends Model
 {
     public $timestamps = false;
-    protected $table="ask";
-    protected $fillable = ['name', 'remark' ];
+    protected $table="Year";
+    protected $fillable = ['name' ];
 }

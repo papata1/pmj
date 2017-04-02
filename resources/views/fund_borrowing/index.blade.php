@@ -49,7 +49,24 @@
                                                </tr>
                                            </thead>
                                            <tbody>
-                                                
+                                                   @foreach($ser as $user)
+                                                    <tr>
+                                                        <td>{{ $user->id_p}}  </td>
+                                                        <td>{{ $user->name}} {{ $user->surename}}  </td>
+                                                        <td>{{ $user->name}} {{ $user->surename}}  </td>
+                                                        <td>{{ $user->date}}  </td>
+                                                        <td>{{ $user->date}}  </td>
+                                                        <td>{{ $user->year}}  </td>
+                                                            <td>
+                                                            {!! Form::open(array('route'=>['Fund_borrowing.destroy',$user->id_r],'method'=>'DELETE')) !!}
+                                                            {{ link_to_route('Fund_borrowing.show','',[$user->id_r],['class'=>'btn btn-info glyphicon glyphicon-edit ']) }}
+                                                            {{ link_to_route('Fund_borrowing.edit','',[$user->id_r],['class'=>'btn btn-info glyphicon glyphicon-edit ']) }}
+                                                            {!! Form::button('',['class'=>'btn btn-danger glyphicon glyphicon-remove-sign del','type'=>'submit']) !!}
+                                                            <a herf='#' class='btn btn-default fa fa-print'></a>
+                                                            {!! Form::close() !!}
+                                                            </td>
+                                                    </tr>
+                                                    @endforeach
                                            </tbody>
                                        </table>
                                        <!-- /.table-responsive -->

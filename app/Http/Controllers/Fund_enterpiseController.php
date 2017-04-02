@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\DeRequest;
 use App\Http\Requests\ServiceRequest;
 use App\Service;
+use App\Enterpise_info;
+use App\Enterpise_detail;
+use App\Enterpise_list;
+use App\Enterpise_man;
+use App\Enterpise_visit;
 use Illuminate\Support\Facades\DB;
 
 class Fund_enterpiseController extends Controller

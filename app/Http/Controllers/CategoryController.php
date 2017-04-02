@@ -19,7 +19,9 @@ class CategoryController extends Controller
   }
     public function index(){
       //$app = application_layer::all();
-      $cate = DB::table('category')->get();
+      $cate = DB::table('category')
+      ->where('id','!=','0')
+      ->get();
       return view('category.index', compact('cate'));
     }
     public function create(){
