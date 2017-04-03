@@ -235,7 +235,7 @@
                                          <input type="radio" class='live_status' id="live_status" name="live_status" value="อาศัยอยู่กับบุตรหลานญาติ" @if($service->live_status=='อาศัยอยู่กับบุตรหลานญาติ')checked="checked"@endif/><span> อาศัยอยู่กับบุตรหลาน/ญาติ&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status' id="live_status" name="live_status" value="บ้านพักสวัสดิการ" @if($service->live_status=='บ้านพักสวัสดิการ')checked="checked"@endif/><span> บ้านพักสวัสดิการ&nbsp;&nbsp;</span>
                                          @if($service->live_status== 3 )
-                                         <input type="radio"  class="c" id="live_status111" name="live_status" checked="checked" value="3"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status14" name="c_live_status" value="{{$service->live_status}}"/>
+                                         <input type="radio"  class="c" id="live_status111" name="live_status" checked="checked" value="3"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status14" name="c_live_status" value="{{$service->c_live_status}}"/>
                                          @else
                                          <input type="radio"  class="c" id="live_status111" name="live_status"  value="3" /><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status14" name="c_live_status" disabled/>
                                          @endif
@@ -281,7 +281,7 @@
                                        <input type="radio"  class='check' id="prefix1" name="prefix1" value="นาง" @if($ser->prefix=='นาง')checked="checked"@endif/><span> นาง&nbsp;&nbsp;</span>
                                        <input type="radio"  class='check' id="prefix1" name="prefix1" value="นางสาว" @if($ser->prefix=='นางสาว')checked="checked"@endif/><span> นางสาว&nbsp;&nbsp;</span>
                                        @if($ser->prefix!='นางสาว' && $ser->prefix!='นาง' && $ser->prefix!='นาย')
-                                       <input type="radio"  class='checked' id="prefix12" name="prefix1" checked="checked" /><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text"  id="prefix123" name="prefix1"  class='checkedinput' value="{{$service->prefix1}}"  />
+                                       <input type="radio"  class='checked' id="prefix12" name="prefix1" checked="checked" /><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text"  id="prefix123" name="prefix1"  class='checkedinput' value="{{$service->prefix}}"  />
                                        @else
                                        <input type="radio"  class='checked' id="prefix12" name="prefix1"  /><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text"  id="prefix123" name="prefix1"  class='checkedinput' disabled />
                                        @endif
@@ -316,7 +316,14 @@
                                         <div class="col-lg-12"> <br />  </div>
 
                                         <label class="col-lg-3" >รูปผู้กู้ยืม</label>
+                                        @if ($ser->pic)
                                         <input type="file" class="col-lg-9" name="pic" value="{{$ser->pic}}" >
+                                        <div class="col-lg-1" ></div>
+                                       <p><img src="{{ URL::to('/') }}/images/{{ $ser->pic }}" class="col-lg-3"  width="200" height="200" /></p>
+                                        @else
+                                        <div>ไม่มีรูปภาพ</div>
+                                        <input type="file" class="col-lg-9" name="pic" value="{{$ser->pic}}" >
+                                        @endif
                                         <div class="col-lg-12"> <br />  </div>
                                         <div class="col-lg-12"> <br />  </div>
 
@@ -485,12 +492,12 @@
                                        <label class="col-lg-2">สถานะการอยู่อาศัย</label>
                                        <div class="col-lg-10">
                                         @if($ser2->live_status== 1 )
-                                       <input type="radio" class="b" id="live_status2" name="live_status1" value="1" checked="checked"/><span> เช่า&nbsp;</span><input type="text" id="live_status22" name="c_live_status1" value="{{$ser2->c_live_status1}}"/> บาท/เดือน&nbsp;&nbsp;
+                                       <input type="radio" class="b" id="live_status2" name="live_status1" value="1" checked="checked"/><span> เช่า&nbsp;</span><input type="text" id="live_status22" name="c_live_status1" value="{{$ser2->c_live_status}}"/> บาท/เดือน&nbsp;&nbsp;
                                         @else
                                          <input type="radio" class="b" id="live_status2" name="live_status1" value="1" /><span> เช่า&nbsp;</span><input type="text" id="live_status22" name="c_live_status1" disabled/> บาท/เดือน&nbsp;&nbsp;
                                         @endif
                                         @if($ser2->live_status== 2 )
-                                       <input type="radio" class="b" id="live_status3" name="live_status1" value="2" checked="checked"/><span> ผ่อน&nbsp;</span><input type="text" id="live_status33" name="c_live_status1" value="{{$ser2->c_live_status1}}"/> บาท/เดือน&nbsp;&nbsp;
+                                       <input type="radio" class="b" id="live_status3" name="live_status1" value="2" checked="checked"/><span> ผ่อน&nbsp;</span><input type="text" id="live_status33" name="c_live_status1" value="{{$ser2->c_live_status}}"/> บาท/เดือน&nbsp;&nbsp;
                                        @else
                                        <input type="radio" class="b" id="live_status3" name="live_status1" value="2" /><span> ผ่อน&nbsp;</span><input type="text" id="live_status33" name="c_live_status1" disabled/> บาท/เดือน&nbsp;&nbsp;
                                         @endif
@@ -503,7 +510,7 @@
                                          <input type="radio" class='live_status1' id="live_status" name="live_status1" value="อาศัยอยู่กับบุตรหลานญาติ"/><span> อาศัยอยู่กับบุตรหลาน/ญาติ&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status1' id="live_status" name="live_status1" value="บ้านพักสวัสดิการ"/><span> บ้านพักสวัสดิการ&nbsp;&nbsp;</span>
                                        @if($ser2->live_status== 3 )
-                                         <input type="radio" class="b" id="live_status4" name="live_status1" value="3" checked="checked"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status44" name="c_live_status1" value="{{$ser2->c_live_status1}}"/>>
+                                         <input type="radio" class="b" id="live_status4" name="live_status1" value="3" checked="checked"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status44" name="c_live_status1" value="{{$ser2->c_live_status}}"/>>
                                          @else
                                          <input type="radio" class="b" id="live_status4" name="live_status1" value="3"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status44" name="c_live_status1" disabled/>
                                          @endif
@@ -759,7 +766,6 @@
 
                                        <label class="col-lg-2">ประเภทที่อยู่</label>
                                        <div class="col-lg-10">
-                                       @if($ser2->live_status== 1 )
                                        <input type="radio" class="live_cate2" id="live_cate" name="live_cate5" value="บ้าน" /><span> บ้าน&nbsp;&nbsp;</span>
                                        <input type="radio" class="live_cate2" id="live_cate" name="live_cate5" value="ทาวน์เฮาส์" /><span> ทาวน์เฮาส์&nbsp;&nbsp;</span>
                                        <input type="radio" class="live_cate2" id="live_cate" name="live_cate5" value="คอนโดมิเนียม" /><span> คอนโดมิเนียม&nbsp;&nbsp;</span>
@@ -770,8 +776,16 @@
 
                                        <label class="col-lg-2">สถานะการอยู่อาศัย</label>
                                        <div class="col-lg-10">
-                                       <input type="radio" class="a" id="live_status21" name="live_status5" value="" /><span> เช่า&nbsp;</span><input type="text" id="live_status221" name="live_status5" disabled/> บาท/เดือน&nbsp;&nbsp;
-                                       <input type="radio" class="a" id="live_status31" name="live_status5" value="" /><span> ผ่อน&nbsp;</span><input type="text" id="live_status331" name="live_status5" disabled/> บาท/เดือน&nbsp;&nbsp;
+                                        @if($ser5->live_status== 1 )
+                                       <input type="radio" class="a" id="live_status21" name="live_status5" value="1" checked="checked"/><span> เช่า&nbsp;</span><input type="text" id="live_status221" name="c_live_status5" value="{{$ser5->c_live_status}}"/> บาท/เดือน&nbsp;&nbsp;
+                                       @else
+                                       <input type="radio" class="a" id="live_status21" name="live_status5" value="1" /><span> เช่า&nbsp;</span><input type="text" id="live_status221" name="c_live_status5" disabled/> บาท/เดือน&nbsp;&nbsp;
+                                         @endif
+                                         @if($ser5->live_status== 2 )
+                                       <input type="radio" class="a" id="live_status31" name="live_status5" value="2" checked="checked"/><span> ผ่อน&nbsp;</span><input type="text" id="live_status331" name="c_live_status5" value="{{$ser5->c_live_status}}"/> บาท/เดือน&nbsp;&nbsp;
+                                       @else
+                                       <input type="radio" class="a" id="live_status31" name="live_status5" value="2" /><span> ผ่อน&nbsp;</span><input type="text" id="live_status331" name="c_live_status5" disabled/> บาท/เดือน&nbsp;&nbsp;
+                                        @endif                                     
                                        <input type="radio" class='live_status2' id="live_status" name="live_statuS5" value="เป็นของตนเองปลอดภาระ"/><span> เป็นของตนเองปลอดภาระ&nbsp;&nbsp;</span>
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
@@ -780,7 +794,11 @@
                                          <input type="radio" class='live_status2' id="live_status" name="live_status5" value="เป็นของบุคคลอื่น"/><span> เป็นของบุคคลอื่น&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status2' id="live_status" name="live_status5" value="อาศัยอยู่กับบุตรหลานญาติ"/><span> อาศัยอยู่กับบุตรหลาน/ญาติ&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status2' id="live_status" name="live_status5" value="บ้านพักสวัสดิการ"/><span> บ้านพักสวัสดิการ&nbsp;&nbsp;</span>
-                                         <input type="radio" class="a" id="live_status41" name="live_status5" value=""/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status441" name="live_status5" disabled/>
+                                         @if($ser5->live_status== 3 )
+                                         <input type="radio" class="a" id="live_status41" name="live_status5" value="3" checked="checked"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status441" name="c_live_status5" value="{{$ser5->c_live_status}}"/>
+                                         @else
+                                          <input type="radio" class="a" id="live_status41" name="live_status5" value="3"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status441" name="c_live_status5" disabled/>
+                                         @endif 
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
 
@@ -888,7 +906,7 @@
           });
 
            $('#live_status1').on('click',function(){
-              $('.c').val(1);
+            //  $('.c').val(1);
               $("#live_status12").prop('disabled', false);
               $("#live_status14").prop('disabled', true);
               $("#live_status14").val('');
@@ -896,7 +914,7 @@
               $("#live_status13").val('');
           });
           $('#live_status11').on('click',function(){
-               $('.c').val(2);
+               //$('.c').val(2);
               $("#live_status13").prop('disabled', false);
               $("#live_status12").prop('disabled', true);
               $("#live_status14").prop('disabled', true);
@@ -904,7 +922,7 @@
               $("#live_status12").val('');
           });
            $('#live_status111').on('click',function(){
-               $('.c').val(3);
+              // $('.c').val(3);
               $("#live_status14").prop('disabled', false);
               $("#live_status13").prop('disabled', true);
               $("#live_status13").val('');
@@ -912,7 +930,7 @@
               $("#live_status12").val('');
           });
           $('.live_status').on('click',function(){
-              $('.c').val('');
+             // $('.c').val('');
               $("#live_status14").prop('disabled', true);
               $("#live_status14").val('');
               $("#live_status13").prop('disabled', true);
@@ -953,7 +971,7 @@
               $("#live_cate3").prop('disabled', true);
           });
            $('#live_status2').on('click',function(){
-              $('.b').val(1);
+              //$('.b').val(1);
               $("#live_status22").prop('disabled', false);
               $("#live_status44").prop('disabled', true);
               $("#live_status44").val('');
@@ -961,7 +979,7 @@
               $("#live_status33").val('');
           });
           $('#live_status3').on('click',function(){
-               $('.b').val(2);
+              // $('.b').val(2);
               $("#live_status33").prop('disabled', false);
               $("#live_status22").prop('disabled', true);
               $("#live_status44").prop('disabled', true);
@@ -969,7 +987,7 @@
               $("#live_status22").val('');
           });
            $('#live_status4').on('click',function(){
-               $('.b').val(3);
+              // $('.b').val(3);
               $("#live_status44").prop('disabled', false);
               $("#live_status33").prop('disabled', true);
               $("#live_status33").val('');
@@ -978,7 +996,7 @@
           });
           $('.live_status1').on('click',function(){
               //alert(5);
-              $('.b').val('');
+              //$('.b').val('');
               $("#live_status44").prop('disabled', true);
               $("#live_status44").val('');
               $("#live_status33").prop('disabled', true);
@@ -1004,7 +1022,7 @@
               $("#live_cate5").prop('disabled', true);
           });
            $('#live_status21').on('click',function(){
-              $('.a').val(1);
+              //$('.a').val(1);
               $("#live_status221").prop('disabled', false);
               $("#live_status441").prop('disabled', true);
               $("#live_status441").val('');
@@ -1012,7 +1030,7 @@
               $("#live_status331").val('');
           });
           $('#live_status31').on('click',function(){
-               $('.a').val(2);
+              // $('.a').val(2);
               $("#live_status331").prop('disabled', false);
               $("#live_status221").prop('disabled', true);
               $("#live_status441").prop('disabled', true);
@@ -1020,7 +1038,7 @@
               $("#live_status221").val('');
           });
            $('#live_status41').on('click',function(){
-               $('.a').val(3);
+               //$('.a').val(3);
               $("#live_status441").prop('disabled', false);
               $("#live_status331").prop('disabled', true);
               $("#live_status331").val('');
@@ -1029,7 +1047,7 @@
           });
           $('.live_status2').on('click',function(){
               //alert(5);
-              $('.a').val('');
+              //$('.a').val('');
               $("#live_status441").prop('disabled', true);
               $("#live_status441").val('');
               $("#live_status331").prop('disabled', true);

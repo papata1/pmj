@@ -213,8 +213,8 @@
 
                                        <label class="col-lg-2">สถานะการอยู่อาศัย</label>
                                        <div class="col-lg-10">
-                                       <input type="radio" class="c" id="live_status1" name="live_status" value="" /><span> เช่า&nbsp;</span><input type="text" id="live_status12" name="live_status" disabled/> บาท/เดือน&nbsp;&nbsp;
-                                       <input type="radio" class="c" id="live_status11" name="live_status" value="" /><span> ผ่อน&nbsp;</span><input type="text" id="live_status13" name="live_status" disabled/> บาท/เดือน&nbsp;&nbsp;
+                                       <input type="radio" class="c" id="live_status1" name="live_status" value="1" /><span> เช่า&nbsp;</span><input type="text" id="live_status12" name="c_live_status" disabled/> บาท/เดือน&nbsp;&nbsp;
+                                       <input type="radio" class="c" id="live_status11" name="live_status" value="2" /><span> ผ่อน&nbsp;</span><input type="text" id="live_status13" name="c_live_status" disabled/> บาท/เดือน&nbsp;&nbsp;
                                        <input type="radio" class='live_status' id="live_status" name="live_status" value="เป็นของตนเองปลอดภาระ"/><span> เป็นของตนเองปลอดภาระ&nbsp;&nbsp;</span>
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
@@ -223,7 +223,7 @@
                                          <input type="radio" class='live_status' id="live_status" name="live_status" value="เป็นของบุคคลอื่น"/><span> เป็นของบุคคลอื่น&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status' id="live_status" name="live_status" value="อาศัยอยู่กับบุตรหลานญาติ"/><span> อาศัยอยู่กับบุตรหลาน/ญาติ&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status' id="live_status" name="live_status" value="บ้านพักสวัสดิการ"/><span> บ้านพักสวัสดิการ&nbsp;&nbsp;</span>
-                                         <input type="radio" class="c" id="live_status111" name="live_status" value=""/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status14" name="live_status" disabled/>
+                                         <input type="radio" class="c" id="live_status111" name="live_status" value="3"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status14" name="c_live_status" disabled/>
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
 
@@ -277,7 +277,6 @@
 
 
 
-                                 {!! Form::hidden('c_live_status', null,['id' => 'c_live_status']) !!}
                                  {!! Form::hidden('category', null,['id' => 'category']) !!}
                                  {!! Form::hidden('class', null,['id' => 'class']) !!}
 
@@ -358,7 +357,7 @@
               }
           });
           $('#live_status11').on('click',function(){
-               $('.c').val(2);
+               //$('.c').val(2);
               $("#live_status13").prop('disabled', false);
               $("#live_status12").prop('disabled', true);
               $("#live_status14").prop('disabled', true);
@@ -366,7 +365,7 @@
               $("#live_status12").val('');
           });
            $('#live_status111').on('click',function(){
-               $('.c').val(3);
+               //$('.c').val(3);
               $("#live_status14").prop('disabled', false);
               $("#live_status13").prop('disabled', true);
               $("#live_status13").val('');
@@ -374,7 +373,7 @@
               $("#live_status12").val('');
           });
           $('.live_status').on('click',function(){
-              $('.c').val('');
+              //$('.c').val('');
               $("#live_status14").prop('disabled', true);
               $("#live_status14").val('');
               $("#live_status13").prop('disabled', true);
@@ -400,9 +399,8 @@
           });
 
          $('#add1').click(function () {
-              $('#c_live_status').val($('.c').val());
-              $('#category').val(1);
-               $('#category').val('id');
+               $('#category').val(1);
+               $('#class').val('id');
         });
 
     });

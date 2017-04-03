@@ -13,6 +13,8 @@ use App\Identity_info;
 use App\Identity_status;
 use App\category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 class Fund_borrowingController extends Controller
 {
@@ -44,6 +46,18 @@ class Fund_borrowingController extends Controller
     public function store(ServiceRequest $request)
      {
       $bowwoer = Borrowing_info::create($request->all());
+      if ($request->hasFile('pic')) {
+            $fileName = $bowwoer->id . '.' .
+                $request->file('pic')->getClientOriginalExtension();
+
+            $request->file('pic')->move(
+                base_path() . '/public/images/', $fileName
+
+            );
+            $busfile = DB::table('Borrowing_info')
+                ->where('id', $bowwoer->id)
+                ->update(['pic' => $fileName]);
+        }
       $id = Identity_info::create($request->all());
       $address = Address::create($request->all());
       $status = Identity_status::create($request->all());
@@ -227,20 +241,75 @@ class Fund_borrowingController extends Controller
         return redirect()->route('Fund_borrowing.index')->with('message','item has been added successfully');
      }
 
-     public function show(Identity_status $service)
+     public function show($service1)
      {
-            $ser = DB::table('borrowing_info')
+            $service = DB::table('borrowing_info')
             ->leftJoin('Identity_status','Identity_status.borrower_id', '=', 'borrowing_info.id')
             ->leftJoin('Identity_info','Identity_info.id_rela', '=', 'Identity_status.id')
             ->leftJoin('Address','Address.id_rela', '=', 'Identity_status.id')
-            //->whereIn('class', ['guarantor', 'borrow'])
-           // ->where('class', 'guarantor')
-           ->Where('class', 'borrow')
+            ->Where('class', 'borrow')
             ->where('Identity_info.category', '1')
-            ->where('borrowing_info.id_rela',$service->id)
+            ->where('borrowing_info.id',$service1)
+            ->select('*','borrowing_info.id as id')
+            ->first();
+             $ser = DB::table('borrowing_info')
+            ->leftJoin('Identity_status','Identity_status.borrower_id', '=', 'borrowing_info.id')
+            ->leftJoin('Identity_info','Identity_info.id_rela', '=', 'Identity_status.id')
+            ->leftJoin('Address','Address.id_rela', '=', 'Identity_status.id')
+           ->Where('class', 'borrow')
+            ->where('Identity_info.category', '2')
+            ->where('borrowing_info.id',$service1)
             ->select('*')
             ->first();
-            return view('Fund_borrowing.show',compact('service'));
+            //--------------------------------------------------------------------
+             $ser2 = DB::table('borrowing_info')
+            ->leftJoin('Identity_status','Identity_status.borrower_id', '=', 'borrowing_info.id')
+            ->leftJoin('Identity_info','Identity_info.id_rela', '=', 'Identity_status.id')
+            ->leftJoin('Address','Address.id_rela', '=', 'Identity_status.id')
+           ->Where('class', 'guarantor')
+            ->where('Identity_info.category', '1')
+            ->where('borrowing_info.id',$service1)
+            ->select('*')
+            ->first();
+             $ser3 = DB::table('borrowing_info')
+            ->leftJoin('Identity_status','Identity_status.borrower_id', '=', 'borrowing_info.id')
+            ->leftJoin('Identity_info','Identity_info.id_rela', '=', 'Identity_status.id')
+            ->leftJoin('Address','Address.id_rela', '=', 'Identity_status.id')
+           ->Where('class', 'guarantor')
+              ->where('Address.category', '2')
+            ->where('borrowing_info.id',$service1)
+            ->select('*')
+            ->first();
+            $ser35 = DB::table('borrowing_info')
+            ->leftJoin('Identity_status','Identity_status.borrower_id', '=', 'borrowing_info.id')
+            ->leftJoin('Address','Address.id_rela', '=', 'Identity_status.id')
+           ->Where('class', 'guarantor')
+            ->where('Address.category', '3')
+            ->where('borrowing_info.id',$service1)
+            ->select('*')
+            ->first();
+            //---------------------------------------------------------------------
+             $ser4 = DB::table('borrowing_info')
+            ->leftJoin('Identity_status','Identity_status.borrower_id', '=', 'borrowing_info.id')
+            ->leftJoin('Identity_info','Identity_info.id_rela', '=', 'Identity_status.id')
+            ->leftJoin('Address','Address.id_rela', '=', 'Identity_status.id')
+           ->Where('class', 'heir')
+            ->where('Identity_info.category', '1')
+            ->where('borrowing_info.id',$service1)
+            ->select('*')
+            ->first();
+             $ser5 = DB::table('borrowing_info')
+            ->leftJoin('Identity_status','Identity_status.borrower_id', '=', 'borrowing_info.id')
+            ->leftJoin('Address','Address.id_rela', '=', 'Identity_status.id')
+           ->Where('class', 'heir')
+            ->where('Address.category', '2')
+            ->where('borrowing_info.id',$service1)
+            ->select('*')
+            ->first();
+         // dd($ser3);
+           
+            
+        return view('fund_borrowing.show',compact('service','ser','ser1','ser2','ser3','ser35','ser4','ser5'));
      }
 
      public function edit($service1)
@@ -278,7 +347,7 @@ class Fund_borrowingController extends Controller
             ->leftJoin('Identity_info','Identity_info.id_rela', '=', 'Identity_status.id')
             ->leftJoin('Address','Address.id_rela', '=', 'Identity_status.id')
            ->Where('class', 'guarantor')
-            ->where('Identity_info.category', '2')
+              ->where('Address.category', '2')
             ->where('borrowing_info.id',$service1)
             ->select('*')
             ->first();
@@ -308,7 +377,7 @@ class Fund_borrowingController extends Controller
             ->where('borrowing_info.id',$service1)
             ->select('*')
             ->first();
-           //dd($service);
+         // dd($ser3);
            
             
         return view('fund_borrowing.edit',compact('service','ser','ser1','ser2','ser3','ser35','ser4','ser5'));
@@ -317,6 +386,23 @@ class Fund_borrowingController extends Controller
     public function update(ServiceRequest $request,$service1)
    {
           //dd($service);
+          $i = mt_rand(0,100);
+
+        if ($request->hasFile('pic')) {
+            $fileName = 'edit'.$bus->id.'-'.$i. '.' .
+                $request->file('pic')->getClientOriginalExtension();
+            $fileName1 = $bus->id . '.' .
+                $request->file('pic')->getClientOriginalExtension();
+
+            $request->file('pic')->move(
+                base_path() . '/public/images/', $fileName
+
+            );
+
+            $busfile1 = DB::table('borrowing_info')
+                ->where('id', $service1)
+                ->update(['pic' => $fileName]);
+        }
             $rela = $request->get('id_rela');
             $rela1 = $request->get('id_rela1');
             $rela2 = $request->get('id_rela2');
@@ -326,7 +412,6 @@ class Fund_borrowingController extends Controller
             'debt_cat' => $request->get('debt_cat'),
             'money' => $request->get('money'),
             'forwhat' => $request->get('forwhat'),
-            'pic' => $request->get('pic'),
             'relation' => $request->get('relation'),
             'job_borrow' => $request->get('job_borrow'),
             'role' => $request->get('role'),
@@ -483,7 +568,7 @@ class Fund_borrowingController extends Controller
             ->update([
             'live_cate' => $request->get('live_cate5'),
             'live_status' => $request->get('live_status5'),
-            'c_live_status' => $request->get('c_live_status2'),
+            'c_live_status' => $request->get('c_live_status5'),
             ]);
             $id3 = DB::table('Identity_info')
             ->where('id_rela', $rela2)

@@ -23,7 +23,7 @@ class ServiceController extends Controller
   }
     public function index(){
       //$app = application_layer::all();
-     // $ser = DB::table('Service')->get();
+      //$ser = DB::table('Service')->get();
      $ser = DB::table('Identity_status')
             ->leftJoin('Identity_info','Identity_info.id_rela', '=', 'Identity_status.id')
             ->leftJoin('Address','Address.id_rela', '=', 'Identity_status.id')
@@ -32,7 +32,9 @@ class ServiceController extends Controller
             ->where('Identity_info.category', '1')
             ->select('*')
             ->get();
-                                                     // dd($ser);
+
+                // $ser = 0 ;                           
+                        //  dd($ser);
 
       return view('service.index',compact('ser'));
     }

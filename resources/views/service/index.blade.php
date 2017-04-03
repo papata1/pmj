@@ -48,7 +48,7 @@
                                                    <th>วันที่ยื่น</th>
                                                </tr>
                                            </thead>
-                                           <tbody>
+                                           <tbody>                                                     
                                                     @foreach($ser as $user)
                                                     <tr>
                                                         <td>{{ $user->id_p}}  </td>
@@ -69,7 +69,7 @@
                                            </tbody>
                                        </table>
                                        <!-- /.table-responsive -->
-
+                                                   
                                    </div>
                                    <!-- /.panel-body -->
                                </div>
