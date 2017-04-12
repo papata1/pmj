@@ -8,6 +8,6 @@ class Enterpise_info extends Model
 {
     public $timestamps = false;
     protected $table="enterpise_info";
-    protected $fillable = ['name_th', 'name_en', 'category', 'location', 'map_long', 'map_la', 'phone', 'fax', 'email', 'year','email'];
+    protected $fillable = ['year','date','name_th', 'name_en', 'company','category','category_other', 'location', 'map_long', 'map_la', 'phone', 'fax', 'email', 'year_start','email','objective_i'];
 
 }

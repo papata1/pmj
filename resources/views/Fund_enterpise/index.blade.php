@@ -49,7 +49,24 @@
                                                </tr>
                                            </thead>
                                            <tbody>
-                                                
+                                                  @foreach($ser as $user)
+                                                    <tr>
+                                                        <td>{{ $user->fax}}  </td>
+                                                        <td>{{ $user->name_th}}  </td>
+                                                        <td>  </td>
+                                                        <td>{{ $user->date}}  </td>
+                                                        <td>  </td>
+                                                        <td>{{ $user->year}}  </td>
+                                                            <td>
+                                                            {!! Form::open(array('route'=>['Fund_enterpise.destroy',$user->id],'method'=>'DELETE')) !!}
+                                                            {{ link_to_route('Fund_enterpise.show','',[$user->id],['class'=>'btn btn-info glyphicon glyphicon-edit ']) }}
+                                                            {{ link_to_route('Fund_enterpise.edit','',[$user->id],['class'=>'btn btn-info glyphicon glyphicon-edit ']) }}
+                                                            {!! Form::button('',['class'=>'btn btn-danger glyphicon glyphicon-remove-sign del','type'=>'submit']) !!}
+                                                            <a herf='#' class='btn btn-default fa fa-print'></a>
+                                                            {!! Form::close() !!}
+                                                            </td>
+                                                    </tr>
+                                                    @endforeach
                                            </tbody>
                                        </table>
                                        <!-- /.table-responsive -->

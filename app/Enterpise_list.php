@@ -8,6 +8,6 @@ class Enterpise_list extends Model
 {
     public $timestamps = false;
     protected $table="enterpise_list";
-    protected $fillable = ['name', 'cost', 'enterpise_info_id'];
+    protected $fillable = ['name_l', 'cost_l', 'enterpise_info_id'];
 
 }
