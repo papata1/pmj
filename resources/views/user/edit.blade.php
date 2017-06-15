@@ -5,11 +5,11 @@
 <div class="page">
        <div class="row">
            <div class="col-md-12">
-               <h1 class="page-header">ตั้งค่าแอคเคาท์</h1>
+               <h1 class="page-header">แก้ไขแอคเคาท์</h1>
                 {{ link_to_route('user.index','ย้อนกลับ ',null,['class'=>'btn btn-default pull-right']) }}
                 <br />
                 <br />
-               <div class="panel panel-primary">
+               <div class="panel panel-default">
 
                    <div class="panel-heading">สมาชิก</div>
 
@@ -30,22 +30,22 @@
                                     <div class="form-group">
                                          <label>อำนาจแก้ไข</label>&nbsp;&nbsp;
                                          <label class="checkbox-inline">
-                                               <input type="checkbox" id="c1" vaule="1"> งานกู้ยืมเงินกองทุนผู้สูงอายุ
+                                               <input type="checkbox" id="c1" vaule="1" @if($user->rent=='1')checked="checked"@endif> งานกู้ยืมเงินกองทุนผู้สูงอายุ
                                            </label>
                                            <label class="checkbox-inline">
-                                               <input type="checkbox" id="c2"> งานโครงการขอรับการสนับสนุน
+                                               <input type="checkbox" id="c2" @if($user->project=='1')checked="checked"@endif> งานโครงการขอรับการสนับสนุน
                                            </label>
                                            <label class="checkbox-inline">
-                                               <input type="checkbox" id="c3"> งานบัญชี
+                                               <input type="checkbox" id="c3" @if($user->account=='1')checked="checked"@endif> งานบัญชี
                                            </label>
                                            <label class="checkbox-inline">
-                                               <input type="checkbox" id="c4"> งานติดตามถามทวงหนี้
+                                               <input type="checkbox" id="c4" @if($user->debt=='1')checked="checked"@endif> งานติดตามถามทวงหนี้
                                            </label>
                                            <label class="checkbox-inline">
-                                               <input type="checkbox" id="c5"> ประมวลผลกองทุน
+                                               <input type="checkbox" id="c5" @if($user->process=='1')checked="checked"@endif> ประมวลผลกองทุน
                                            </label>
                                             <label class="checkbox-inline">
-                                               <input type="checkbox" id="c6"> Super Admin
+                                               <input type="checkbox" id="c6" @if($user->role=='1')checked="checked"@endif> Super Admin
                                            </label>
                                       </div>
                                     {!! Form::hidden('rent', null,['id' => 'rent']) !!}
@@ -55,7 +55,7 @@
                                     {!! Form::hidden('process', null,['id' => 'process']) !!}
                                     {!! Form::hidden('role', null,['id' => 'role']) !!}
                                     <div class="form-group">
-                                        {!! Form::button('เพิ่ม',['type'=>'submit','class'=>'btn btn-primary']) !!}
+                                        {!! Form::button('บันทึก',['type'=>'submit','class'=>'btn btn-primary']) !!}
                                         {{ link_to_route('user.index','ย้อนกลับ',null,['class'=>'btn btn-danger','id'=>'add1']) }}
                                     </div>
                                     <div id="test"></div>
@@ -77,23 +77,28 @@
     $(document).ready(function() {
 
                 //              alert(5);
-                var ch1 =0 ;
-                var ch2 =0 ;
-                var ch3 =0 ;
-                var ch4 =0 ;
-                var ch5 =0 ;
-                var ch6 =0 ;
-
+                var ch1 = '<?php echo $user->rent ;?>';
+                var ch2 = '<?php echo $user->project ;?>';
+                var ch3 = '<?php echo $user->account ;?>';
+                var ch4 = '<?php echo $user->debt ;?>';
+                var ch5 = '<?php echo $user->process ;?>';
+                var ch6 = '<?php echo $user->role ;?>';
+//alert(ch1);
           $('#c1').on('click',function(){
-            if(ch1==0){
-             $("#rent").val('1');
-             ch1 =1 ;
-            }else{
+
+            if(ch1== 1){
              $("#rent").val('0');
-             ch1 ='0' ;
-            }
-             alert($("#rent").val());
-            $("#test").html($("#rent").val());
+             ch1 =0 ;
+             //alert(ch1);
+             //$("#c1").prop('checked', false);
+           }else{
+             $("#rent").val('1');
+             ch1 ='1' ;
+           }
+
+
+            // alert($("#rent").val());
+            //$("#test").html($("#rent").val());
           });
 
            $('#c2').on('click',function(){
@@ -103,18 +108,19 @@
             }else{
              $("#project").val('0');
              ch2 ='0' ;
-            }
+           }
+
           //   alert($("#rent").val());
          //   $("#test").html($("#rent").val());
           });
           $('#c3').on('click',function(){
-            if(ch3==0){
+           if(ch3==0){
              $("#account").val('1');
              ch3 =1 ;
             }else{
              $("#account").val('0');
              ch3 ='0' ;
-            }
+           }
           //   alert($("#rent").val());
          //   $("#test").html($("#rent").val());
           });
@@ -125,18 +131,18 @@
             }else{
              $("#debt").val('0');
              ch4 ='0' ;
-            }
+           }
           //   alert($("#rent").val());
          //   $("#test").html($("#rent").val());
           });
           $('#c5').on('click',function(){
-            if(ch5==0){
+          if(ch5==0){
              $("#process").val('1');
              ch5 =1 ;
             }else{
              $("#process").val('0');
              ch5 ='0' ;
-            }
+           }
            //  alert($("#process").val());
          //  $("#test").html($("#process").val());
           });
@@ -157,7 +163,8 @@
              $("#debt").val('0');
              $("#process").val('0');
              ch6 ='0' ;
-            }
+           }
+
          //    alert($("#role").val());
          //  $("#test").html($("#role").val());
           });

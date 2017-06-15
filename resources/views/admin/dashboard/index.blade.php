@@ -19,41 +19,7 @@
                     </div>
                 <div class="col-lg-3">  </div>
 
-                <div class="col-lg-12">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                          นำเข้าข้อมูลบุคคล กองทุนผู้สูงอายุ
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-
-                              <a class="btn btn-success btn-lg fa fa-file-excel-o "> นำเข้าข้อมูล</a>
-                              <a class="btn btn-default btn-lg fa fa-file-excel-o pull-right"> Download template</a>
-
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-
-                <div class="col-lg-12">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                          นำเข้าข้อมูลบุคคล งานผู้เข้ารับบริการ
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-
-                              <a class="btn btn-success btn-lg fa fa-file-excel-o "> นำเข้าข้อมูล</a>
-                              <a class="btn btn-default btn-lg fa fa-file-excel-o pull-right"> Download template</a>
-
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
+              
 
 
               </div><!-- /row -->

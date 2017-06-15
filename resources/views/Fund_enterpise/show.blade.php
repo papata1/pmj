@@ -4,7 +4,7 @@
     <div id="page">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">งานโครงการขอรับการสนับสนุน</h1>
+                    <h1 class="page-header">แสดงข้อมูลโครงการขอรับการสนับสนุน</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -15,7 +15,7 @@
 
                        <div class="row">
                            <div class="col-lg-12">
-                               <div class="panel panel-primary">
+                               <div class="panel panel-default">
                                    <div class="panel-heading">
                                        ลงทะเบียนโครงการ
                                    </div>
@@ -27,11 +27,7 @@
 
                                            <div class="form-group">
                                              <label>ปีงบประมาณ</label>
-                                             <select id="year" name="year">
-                                               <option value="2560">2560</option>
-                                               <option value="2559">2559</option>
-                                               <option value="2558">2558</option>
-                                             </select>
+                                              {!! Form::select('year',['' => ''] + $year, null, ['class' => 'form-control']) !!}
                                            </div>
 
                                            <div >
@@ -61,12 +57,12 @@
                           <input type="radio" name="category" class="col-lg-1 category" value="3" id="" @if($service->category=='3') checked="checked" @endif/><span class="col-lg-5" > สถาบันการศึกษาหรือหน่วยราชการ&nbsp;&nbsp;</span>
                           <input type="radio" name="category" class="col-lg-1 category" value="4" id="" @if($service->category=='4') checked="checked" @endif/><span class="col-lg-5" > องค์กร/ชมรมของผู้สูงอายุ&nbsp;&nbsp;</span>
                           <div class="col-lg-12"> <br />  </div>
-                          @if($service->category=='5') 
+                          @if($service->category=='5')
                           <input type="radio" name="category" class="col-lg-1" id="cat" value="5" checked="checked"/><span class="col-lg-2" > อื่น ๆ ระบุ&nbsp;&nbsp;</span>
                           <input type="text" class="col-lg-9"name="category_other" id="cat1" value="{{$service->category_other}}"/>
                           @else
                           <input type="radio" name="category" class="col-lg-1" id="cat" value="5"/><span class="col-lg-2" > อื่น ๆ ระบุ&nbsp;&nbsp;</span>
-                          <input type="text" class="col-lg-9"name="category_other" id="cat1"  disabled />             
+                          <input type="text" class="col-lg-9"name="category_other" id="cat1"  disabled />
                           @endif
                           <div class="col-lg-12"> <br />  </div>
 
@@ -193,7 +189,7 @@
 
                           <label class="col-lg-12 ">ได้เสนอโครงการเดียวกันนี้เพื่อรับการสนับสนุนจากแหล่งทุนอื่นหรือไม่</label>
                           <div class="col-lg-12"> <br />  </div>
-                          @if($service->other_fund=='1') 
+                          @if($service->other_fund=='1')
                           <input type="radio" name="other_fund" class="col-lg-1"  id="fund1" value="1"  checked="checked"/><span class="col-lg-2" > ไม่</span>
                           <input type="radio" name="other_fund" class="col-lg-1"  id="fund" value="2" /><span class="col-lg-3"> เสนอแหล่งทุนอื่นด้วย </span>
                           <span class="col-lg-1"> คือ</span>
@@ -224,10 +220,7 @@
                           @endif
                                 {!! Form::hidden('chk', null,['id' => 'chk']) !!}
                                 {!! Form::hidden('chk1', null,['id' => 'chk1']) !!}
-                                      <div class="form-group col-lg-12" >
-                                        {{ link_to_route('service.create','ค่าเริ่มต้น',null,['class'=>'btn btn-danger']) }}                                       
-                                        {!! Form::button('ลงทะเบียนผู้กู้ยืม',['type'=>'submit','class'=>'btn btn-primary','id'=>'add1']) !!}
-                                      </div>
+
 
 
                                     {!! Form::close() !!}

@@ -17,12 +17,12 @@ class UserController extends Controller
 {
   public function __construct()
   {
-    // $this->middleware('rent');
-    // $this->middleware('project');
-   //   $this->middleware('account');
-    //    $this->middleware('debt');
-    //     $this->middleware('process');
-      $this->middleware('roles');
+     $this->middleware('rent');
+     $this->middleware('project');
+   $this->middleware('account');
+        $this->middleware('debt');
+        $this->middleware('process');
+      //$this->middleware('roles');
   }
     public function index(){
       //$app = application_layer::all();

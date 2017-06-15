@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ask extends Model
+class Year extends Model
 {
     public $timestamps = false;
-    protected $table="Year";
-    protected $fillable = ['name' ];
+    protected $table="year";
+    protected $fillable = ['year','year_en' ];
 }

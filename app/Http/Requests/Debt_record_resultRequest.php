@@ -22,9 +22,21 @@ class Debt_record_resultRequest extends FormRequest
      *
      * @return array
      */
+     public function messages()
+{
+    return [
+        'contect_id.required' => 'กรุณากรอกเลขที่สัญญา',
+        'no.required' => 'กรุณากรอกเลขรหัสผู้กู้',
+        'date_loan.required' => 'กรุณากรอกวันเริ่มนับยอดกู้',
+        
+    ];
+}
     public function rules()
     {
         return [
+            'contect_id'=>'required',
+            'no'=>'required',
+            'date_loan'=>'required',
 
         ];
     }

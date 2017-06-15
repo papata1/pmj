@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\identity_info;
+use App\Identity_info;
 use Illuminate\Foundation\Http\FormRequest;
 
 class Identity_infoRequest extends FormRequest
@@ -22,10 +22,26 @@ class Identity_infoRequest extends FormRequest
      *
      * @return array
      */
+     public function messages()
+{
+    return [
+        //'required' => 'กรุณาใส่ข้อมูลในช่องที่มี * ให้ครบ',
+        
+    ];
+}
     public function rules()
     {
         return [
-
+            'year'=>'required',
+            'date'=>'required',
+            'id_p'=>'required',
+            'prefix'=>'required',
+            'name'=>'required',
+            'money'=>'required',
+            'forwhat'=>'required',
+            
+            
+            
         ];
     }
 }

@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<style>
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+</style>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -8,7 +15,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>ระบบจัดการเอกสาร พมจ. อุบลราชธานีเหกเ</title>
+    <title>ระบบกองทุนกู้ยืมเงินผู้สูงอายุ พมจ. อุบลราชธานี</title>
 
     <!-- Styles -->
     <link href="../public/css/app.css" rel="stylesheet">
@@ -22,7 +29,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0;background-color:#CC99FF;" >
             <div class="container">
                 <div class="navbar-header">
 
@@ -35,11 +42,15 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}" >
-                        ระบบจัดการเอกสาร พมจ. อุบลราชธานี
-                    </a>
-                </div>
 
+                      <a class="navbar-brand" href="{{ url('/') }}" >
+
+
+                    ระบบกองทุนกู้ยืมเงินผู้สูงอายุ พมจ. อุบลราชธานี
+                    </a>
+
+                </div>
+              
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">

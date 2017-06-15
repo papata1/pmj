@@ -8,11 +8,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ระบบจัดการเอกสาร พมจ. อุบลราชธานี</title>
+    <title >ระบบกองทุนกู้ยืมเงินผู้สูงอายุ พมจ. อุบลราชธานี</title>
 
     <!-- Bootstrap Core CSS -->
     @include('admin.layouts.inc-stylesheet')
 	@yield('stylesheet')
+
+
+
 </head>
 
 <body>
@@ -20,15 +23,15 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;background-color:#CC99FF;" >
+            <div class="navbar-header" >
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href={{ action('HomeController@index')}}>ระบบจัดการเอกสาร พมจ. อุบลราชธานี</a>
+                <a class="navbar-brand" href={{ action('HomeController@index')}} style="color: black;">ระบบกองทุนกู้ยืมเงินผู้สูงอายุ พมจ. อุบลราชธานี</a>
             </div>
             <!-- /.navbar-header -->
 

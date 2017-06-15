@@ -3,10 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row">
-    <br><br><br><br>
-        <div class="col-md-4 col-md-offset-3">
+          <div class="col-md-12 text-center">    <br/> </div>
+            <div class="col-md-4"></div>
+        <div class="col-md-4">
             <div class="panel panel-default">
-                <div class="panel-heading">เข้าสู่ระบบ</div>
+                <div class="panel-heading">  <div class="text-center">
+                    <img src="images/t20131216155010_1298.png" width="50" />
+                    </div><div class="text-center">เข้าสู่ระบบ</div></div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
@@ -37,15 +40,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-0">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : ''}}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="form-group">
                             <div class="col-md-12 col-md-offset-0">

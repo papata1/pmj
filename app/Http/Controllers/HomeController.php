@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Year;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,17 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $ser = DB::table('year')
+        ->orderBy('id', 'desc')
+        ->first();
+        $y = date('Y');
+        if($ser->year_en < $y ){
+        Year::create([
+             'year'=>$ser->year+1,
+              'year_en'=>$y,
+            ]);
+        }
+           // dd($y);
         return view('admin.dashboard.index');
     }
 }

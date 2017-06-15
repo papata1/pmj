@@ -4,11 +4,11 @@
        <div class="row">
            <div class="col-md-12 ">
 
-               <h1 class="page-header">ตั้งค่าแอคเคาท์</h1>
+               <h1 class="page-header">เพิ่มแอคเคาท์</h1>
                 {{ link_to_route('user.index','ย้อนกลับ ',null,['class'=>'btn btn-default pull-right']) }}
                 <br />
                 <br />
-               <div class="panel panel-primary">
+               <div class="panel panel-default">
 
                    <div class="panel-heading">สมาชิก</div>
 

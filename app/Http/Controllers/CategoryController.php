@@ -15,7 +15,6 @@ class CategoryController extends Controller
   public function __construct()
   {
       $this->middleware('auth');
-    //  $this->middleware('roles');
   }
     public function index(){
       //$app = application_layer::all();

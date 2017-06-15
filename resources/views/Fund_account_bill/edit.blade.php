@@ -4,176 +4,112 @@
     <div id="page">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">งานบัญชี</h1>
+                    <h1 class="page-header">แก้ไขใบเสร็จรับเงิน</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
                        <!-- /.row -->
-                       {{ link_to_route('service.index','ย้อนกลับ',null,['class'=>'btn btn-default pull-right']) }}
+                       {{ link_to_route('Fund_account_bill.index','ย้อนกลับ',null,['class'=>'btn btn-default pull-right']) }}
                        <br />
                        <br />
 
                        <div class="row">
                            <div class="col-lg-12">
-                               <div class="panel panel-primary">
+                               <div class="panel panel-default">
                                    <div class="panel-heading">
-                                       ชำระหนี้
+                                      
                                    </div>
                                    <!-- /.panel-heading -->
 
                                        <div class="panel-body">
-
-                                        
-                                        {!! Form::model($service,array('route'=>['service.update',$service->id],'method'=>'PUT','novalidate' => 'novalidate','files' => true)) !!}
-
-                                          <br / >
-                              <h4 style="font-weight:bold;">ดำเนินการ</h4>
-                              <hr />
-
-                              <label class="col-lg-2 ">เลขที่สัญญา</label>
-                              <input type="text" class="col-lg-3"  />
-                              <label  class="col-lg-1"></label>
-                              <label  class="col-lg-2 text-right">รหัสผู้กู้</label>
-                              <input type="text" class="col-lg-3" placeholder="" />
-                              <div class="col-lg-12"> <br />  </div>
-
-                              <label class="col-lg-2 "> จ่ายให้กู้</label>
-                              <input type="text" class="col-lg-3"  />
-                              <label class="col-lg-9 ">  </label>
-                              <div class="col-lg-12"> <br />  </div>
-
-                              <label  class="col-lg-2 text-right">กำหนดเวลาผ่อนชำระ</label>
-                              <input type="text" class="col-lg-3"  />
-                              <label  class="col-lg-1">เดือน</label>
-                              <label  class="col-lg-2 text-right">ระยะเวลา</label>
-                              <input type="text" class="col-lg-3" placeholder="          ปี            เดือน" disabled="" />
-                              <div class="col-lg-12"> <br />  </div>
-
-                              <label class="col-lg-2 ">วันเริ่มสัญญา</label>
-                              <input type="date" class="col-lg-3"  />
-                              <label  class="col-lg-1"></label>
-                              <label  class="col-lg-2 text-right">วันครบกำหนดสัญญา</label>
-                              <input type="date" class="col-lg-3" />
-                              <label  class="col-lg-1"></label>
-                              <div class="col-lg-12"> <br />  </div>
+                        {!! Form::model($service,array('route'=>['Fund_account_bill.update',$service->id_p],
+                        'method'=>'PUT','novalidate' => 'novalidate','files' => true)) !!}
 
 
-                              <label class="col-lg-2 ">ชำระงวดละ</label>
-                              <input type="text" class="col-lg-3"  />
-                              <label  class="col-lg-1">บาท</label>
-                              <label  class="col-lg-2 text-right">ทั้งสิ้น</label>
-                              <input type="text" class="col-lg-3" />
-                              <label  class="col-lg-1">งวด</label>
-                              <div class="col-lg-12"> <br />  </div>
+                                <h4>ชำระเงิน</h4>
+                                <hr />
 
-                              <label class="col-lg-2 ">งวดสุดท้าย</label>
-                              <input type="text" class="col-lg-3"  />
-                              <label  class="col-lg-7 ">บาท</label>
-                              <div class="col-lg-12"> <br />  </div>
+                                <label class="col-lg-2 ">ชื่อ</label>
+                                <input type="text" class="col-lg-3" name="" value="{{$service->name}} {{$service->surename}}" disabled=""/>
+                                <label  class="col-lg-2 text-right">เลขที่สัญญา</label>
+                                <div class="col-lg-5">
+                                <input type="text" class="col-lg-8" name="" value="{{$service->contect_id}}" disabled=""/>
+                                </div>
+                                <div class="col-lg-12"> <br />  </div>
 
+                                <label class="col-lg-2 ">วันที่ชำระ</label>
+                                <input type="date" class="col-lg-3" name="date_pay" value="{{$service->date_pay}}"/>
+                                <label  class="col-lg-2 text-right">ช่องทางการชำระ</label>
+                                <div class="col-lg-4">
+                     <input list="a" name="place_pay"  id="b"class="col-lg-10" value="{{$service->place_pay}}" >
 
-                              <div class="col-lg-12">
-                              <h4 style="font-weight:bold;">ข้อมูลเงินกู้</h4>
-                              <hr /></div>
+                                        <datalist id="a">
+                                        <option value="เค้าเตอร์เซอร์วิส">
+                                        <option value="ธนาณัติ">
+                                        <option value="จ่ายเงินสด">
+                                        </datalist>
 
-                              <label class="col-lg-2 ">วงเงินที่กู้ยืม</label>
-                              <input type="text" class="col-lg-3"  disabled/>
-                              <label  class="col-lg-1">บาท</label>
-                              <label  class="col-lg-2 text-right">ยอดชำระแล้ว</label>
-                              <input type="text" class="col-lg-3" disabled/>
-                              <label  class="col-lg-1">บาท</label>
-                              <div class="col-lg-12"> <br />  </div>
-
-
-
-                              <label class="col-lg-2 ">งวดค้างชำระ จำนวน</label>
-                              <input type="text" class="col-lg-3"  disabled/>
-                              <label  class="col-lg-1">งวด</label>
-                              <label  class="col-lg-2 text-right">ยอดคงเหลือ</label>
-                              <input type="text" class="col-lg-3" disabled/>
-                              <label  class="col-lg-1">บาท</label>
-                              <div class="col-lg-12"> <br />  </div>
+                                           
+                                </div>
+                                <div class="col-lg-12"> <br />  </div>
 
 
-                              <label class="col-lg-2 ">ชำระล่าสุด</label>
-                              <input type="text" class="col-lg-3"  disabled/>
-                              <label  class="col-lg-1"></label>
-                              <label  class="col-lg-2 text-right">วันที่ชำระครั้งล่าสุด</label>
-                              <input type="text" class="col-lg-3" disabled/>
-                              <label  class="col-lg-1"></label>
-                              <div class="col-lg-12"> <br />  </div>
+                                <label class="col-lg-2 ">ยอดชำระ</label>
+                                <input type="text" class="col-lg-3" name="total" value="{{$service->total}}"  />
+                                <label  class="col-lg-2 text-right" >ยอดคงเหลือ</label>
+                                <div class="col-lg-5">
+                                <input type="text" class="col-lg-8" disabled="" name="" value="{{$ser->money_remain}}"/>
+                                </div>
+                                <div class="col-lg-12"> <br />  </div>
 
-                              <label class="col-lg-2 ">วัตถุประสงค์กู้</label>
-                              <input type="text" class="col-lg-3"  disabled/>
-                              <label  class="col-lg-1"></label>
-                              <label  class="col-lg-2 text-right">อาชีพประสงค์กู้</label>
-                              <input type="text" class="col-lg-3" disabled/>
-                              <label  class="col-lg-1"></label>
-                              <div class="col-lg-12"> <br />  </div>
+                                <label class="col-lg-2 ">เล่มที่ใบเสร็จ</label>
+                                <input type="text" class="col-lg-3"   name="bill_book" value="{{$service->bill_book}}"/>
+                                <label  class="col-lg-2 text-right">เลขที่ใบเสร็จ</label>
+                                <div class="col-lg-5">
+                                <input type="text" class="col-lg-8" name="bill_no" value="{{$service->bill_no}}" id="a3"/>
+                                </div>
+                                <div class="col-lg-12"> <br />  </div>
 
+                                <label  class="col-lg-2">หมายเหตุ</label>
+                                <textarea class="col-lg-3" name="remark" >{{$service->remark}}</textarea>
+                                <label  class="col-lg-7"></label>
+                                <div class="col-lg-12"> <br />  </div>
 
+                                  <div id="change">
+                                <div class="col-lg-12">
+                                  <h4>กรณีธนาณัติ</h4>
+                                  <hr />
+                                </div>
 
-                            </form>
-                          </div>
-                          <!-- /.panel-body -->
-                      </div>
-                      <!-- /.panel -->
-                      <div class="form-group" align="center">
-                      <a href="Fund_account_action_pay.php" class="btn btn-primary glyphicon glyphicon-check"> ชำระหนี้</a>
-                      </div>
-                  </div>
-                  <!-- /.col-lg-12 -->
-                </div><!-- /row -->
+                                <label class="col-lg-2 ">เลขที่ธนาณัติ</label>
+                                <input type="text" class="col-lg-3"  name="order_no" value="{{$service->order_no}}" id="a2"/>
+                                <label  class="col-lg-2 text-right">วันที่ส่งธนานัติ</label>
+                                <div class="col-lg-5">
+                                <input type="date" class="col-lg-8" name="order_date" value="{{$service->order_date}}"id="a1"/>
+                                </div>
 
-        <div class="row">
-          <div class="col-lg-12">
-              <div class="panel panel-default">
-                  <div class="panel-heading">
+                                </div>
+                                <div class="col-lg-12"> <br />  </div>
 
-                      <div class="col-md-2">
-                        ตารางชำระหนี้
-                      </div>
-                      <div class="col-md-8">  </div>
-                      <a  class="btn btn-success fa fa-print"> ประวัติชำระเงิน</a>
-                  </div>
-                  <!-- /.panel-heading -->
-                  <div class="panel-body">
-
-                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                        <thead>
-                            <tr>
-                                <th>ครั้งที่</th>
-                                <th>วันที่ชำระ</th>
-                                <th>ช่องการการชำระ</th>
-                                <th>เลขที่ธนาณัติ</th>
-                                <th>ยอดชำระ</th>
-                                <th>ยอดคงเหลือ</th>
-                                <th>เล่มที่ใบเสร็จ</th>
-                                <th>เลขที่ใบเสร็จ</th>
-                                <th>สถานะ</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                           
-                        </tbody>
-                    </table>
-
-                </div><!-- /#panel body -->
-
-              </div><!-- /#panel panel -->
-         </div><!-- /.col-lg-12 -->
-      </div><!-- /#row -->
+                                 {!! Form::hidden('class', null,['id' => 'class']) !!}
                                       <div class="form-group col-lg-12" >
-                                        {{ link_to_route('service.create','ย้อนกลับ',null,['class'=>'btn btn-danger']) }}                                       
-                                        {!! Form::button('ลงทะเบียนผู้กู้ยืม',['type'=>'submit','class'=>'btn btn-primary','id'=>'add1']) !!}
+                                        <button type="button" id="reset" class="btn btn-danger" >ค่าเริ่มต้น</button>
+                                        {!! Form::button('บันทึก',['type'=>'submit','class'=>'btn btn-primary','id'=>'add1']) !!}
+                                      <a href={{ action('Fund_account_billController@excel',[$service->id_p , '1' ] )}} class="btn btn-info fa fa-print pull-right">หนังสือส่งใบเสร็จ</a>
+                                      <a href={{ action('Fund_account_billController@excel',[$service->id_p , '2' ] )}} class="btn btn-primary fa fa-print pull-right">หนังสือแจ้งยอดยืนยัน</a>
+                                      <a href={{ action('Fund_account_billController@excel',[$service->id_p , '0'] )}} class="btn btn-default fa fa-print pull-right">ข้อมูลใบเสร็จรับเงินรายบุลคล</a>
+
                                       </div>
 
 
                                     {!! Form::close() !!}
+                            </form>
+
+
 
 
                                    </div>
+
                                    <!-- /.panel-body -->
                                     @if($errors->any())
                                     <ul class="alert alert-danger">
@@ -192,11 +128,28 @@
                    </div>
                    <!-- /#page-wrapper -->
 
-               </div>
-               <!-- /#wrapper -->
 <script src="{{asset('/assets/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <script>
     $(document).ready(function() {
+        var val = <?php echo json_encode($service->place_pay); ?>;
+         
+        if(val =='ธนาณัติ'){
+            // alert(val);
+               $('#change').show();
+          }else{
+              $('#change').hide();
+          }
+
+        $('#b').on('change',function(){
+              if($('#b').val() =='ธนาณัติ'){
+               $('#change').show();
+          }else{
+               $('#change').hide();
+               $('#a2').val('');
+               $('#a1').val('') ;
+               //$('#a3').val('') ;
+          }
+          });
     });
 
 </script>

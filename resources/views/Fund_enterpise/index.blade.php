@@ -9,22 +9,7 @@
                 <!-- /.col-lg-12 -->
             </div>
                        <!-- /.row -->
-                      <div class="col-md-12">
-                        <div class="col-md-6">
-                         <div class="form-group">
-                                 <label>เลือกปีงบประมาณ</label>
-                                 <select class="form-control">
-                                   <option>ทั้งหมด</option>
-                                   <option>2560</option>
-                                   <option>2559</option>
-                                   <option>2558</option>
-                                   <option>2557</option>
-                                   <option>2556</option>
-                                   <option>2555</option>
-                                </select>
-                         </div>
-                       </div>
-                      </div>
+                    <br><br>
                        <div class="row">
                            <div class="col-lg-12">
                                <div class="panel panel-default">
@@ -32,7 +17,8 @@
                                      <div class="col-md-2">
                                        ข้อมูลโครงการ
                                      </div>
-                                     <div class="col-md-8">  </div> 
+                                     <div class="col-md-8">  </div>
+                                      <!--ปุ่มเพิ่ม-->
                                     {{ link_to_route('Fund_enterpise.create','ลงทะเบียนโครงการ ',null,['class'=>'btn btn-success']) }}
                                    </div>
                                    <!-- /.panel-heading -->
@@ -43,26 +29,38 @@
                                                     <th>ชื่อโครงการ</th>
                                                     <th>ชื่อองค์กรที่เสนอ</th>
                                                     <th>ประเภทโครงการ</th>
-                                                    <th>สถานะอนุมัติ</th>
-                                                    <th>สถานะข้อมูล</th>
+                                                    <th>ปีงบประมาณ</th>
                                                     <th>วันที่ยื่น</th>
+                                                    <th width="170"></th>
                                                </tr>
                                            </thead>
                                            <tbody>
+                                           <!-- วนลูปเพื่อเอาข้อมูลออก -->
                                                   @foreach($ser as $user)
                                                     <tr>
-                                                        <td>{{ $user->fax}}  </td>
                                                         <td>{{ $user->name_th}}  </td>
-                                                        <td>  </td>
-                                                        <td>{{ $user->date}}  </td>
-                                                        <td>  </td>
+                                                        <td> {{ $user->company}}   </td>
+                                                        @if($user->category=='1')
+                                                        <td> องค์กรเอกชน มูลนิธิ </td>
+                                                        @elseif($user->category=='2')
+                                                        <td> องค์กรปกครองส่วนท้องถิ่น </td>
+                                                        @elseif($user->category=='3')
+                                                        <td> สถาบันการศึกษาหรือหน่วยราชการ </td>
+                                                         @elseif($user->category=='4')
+                                                        <td>องค์กร/ชมรมของผู้สูงอายุ  </td>
+                                                        @else()
+                                                        <td> {{ $user->category_other}} </td>
+                                                        @endif
                                                         <td>{{ $user->year}}  </td>
+                                                        <td>{{ $user->date}}  </td>
                                                             <td>
                                                             {!! Form::open(array('route'=>['Fund_enterpise.destroy',$user->id],'method'=>'DELETE')) !!}
-                                                            {{ link_to_route('Fund_enterpise.show','',[$user->id],['class'=>'btn btn-info glyphicon glyphicon-edit ']) }}
+                                                            {{ link_to_route('Fund_enterpise.show','',[$user->id],['class'=>'btn btn-default glyphicon glyphicon-eye-open ']) }}
+                                                            <!--ปุ่มแก้ไข-->
                                                             {{ link_to_route('Fund_enterpise.edit','',[$user->id],['class'=>'btn btn-info glyphicon glyphicon-edit ']) }}
+                                                            <!--ปุ่มลบ-->
                                                             {!! Form::button('',['class'=>'btn btn-danger glyphicon glyphicon-remove-sign del','type'=>'submit']) !!}
-                                                            <a herf='#' class='btn btn-default fa fa-print'></a>
+                                                            <a href={{ action('Fund_enterpiseController@excel',[$user->id] )}} class="btn btn-default fa fa-print"></a>
                                                             {!! Form::close() !!}
                                                             </td>
                                                     </tr>

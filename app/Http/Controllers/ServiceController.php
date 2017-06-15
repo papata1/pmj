@@ -27,16 +27,17 @@ class ServiceController extends Controller
      $ser = DB::table('Identity_status')
             ->leftJoin('Identity_info','Identity_info.id_rela', '=', 'Identity_status.id')
             ->leftJoin('Address','Address.id_rela', '=', 'Identity_status.id')
+            ->leftJoin('category','category.id', '=', 'Identity_status.cat')
             ->where('Address.category', '1')
             ->where('class', 'id')
             ->where('Identity_info.category', '1')
-            ->select('*')
+            ->select('*','category.name as cname','Identity_info.name as iname')
             ->get();
 
                 // $ser = 0 ;                           
-                        //  dd($ser);
+                       //   dd($ser);
 
-      return view('service.index',compact('ser'));
+      return view('service_fix.index',compact('ser'));
     }
     public function create(){
 
@@ -88,7 +89,7 @@ class ServiceController extends Controller
             DB::table('Address')
             ->where('id',$add->id)
             ->update(['id_rela' => $status->id]);
-        return redirect()->route('service.index')->with('message','item has been added successfully');
+        return redirect()->route('service_fix.index')->with('message','item has been added successfully');
      }
 
      public function show(Identity_status $service)
@@ -149,7 +150,7 @@ class ServiceController extends Controller
             'id_exp' => $request->get('id_exp'),
             'prefix' => $request->get('prefix'),
             'dob' => $request->get('dob'),
-            'category'=>'1',
+           // 'category'=>'1',
 
             ]);
         $address = DB::table('Address')
@@ -168,7 +169,7 @@ class ServiceController extends Controller
             'province' => $request->get('province'),
             'zip_code' => $request->get('zip_code'),
             'phone' => $request->get('phone'),
-            'category'=>'1',
+           // 'category'=>'1',
             ]);
         $add= DB::table('Address')
             ->where('id_rela', $service->id)
@@ -186,7 +187,7 @@ class ServiceController extends Controller
             'province' => $request->get('province1'),
             'zip_code' => $request->get('zip_code1'),
             'phone' => $request->get('phone1'),
-            'category'=>'2',
+           // 'category'=>'2',
             ]);
        $id1 = DB::table('Identity_info')
             ->where('id_rela', $service->id)
@@ -198,10 +199,10 @@ class ServiceController extends Controller
             'id_exp' => $request->get('id_exp1'),
             'prefix' => $request->get('prefix1'),
             'dob' => $request->get('dob1'),
-            'category'=>'2',
+            //'category'=>'2',
 
             ]);
-       return redirect()->route('service.index')->with('message','item has been updated successfully');
+       return redirect()->route('service_fix.index')->with('message','item has been updated successfully');
    }
 
      public function destroy(Identity_status $service)
@@ -213,6 +214,6 @@ class ServiceController extends Controller
         DB::table('Address')
             ->where('id_rela', $service->id)
             ->delete();
-        return redirect()->route('service.index')->with('message','item has been deleted successfully');
+        return redirect()->route('service_fix.index')->with('message','item has been deleted successfully');
      }
 }

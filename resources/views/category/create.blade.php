@@ -4,8 +4,8 @@
 
 <div class="container">
        <div class="row">
-           <div class="col-md-8 col-md-offset-2">.
-               <h1 class="page-header">จัดการเรื่องรับบริการ</h1>
+           <div class="col-md-9">
+               <h1 class="page-header">เพิ่มเรื่องของเข้ารับบริการ</h1>
                <div class="panel panel-default">
 
                    <div class="panel-heading"></div>
@@ -38,7 +38,7 @@
                                     @endforeach
                                     </ul>
                                     @endif
-           </div>
+
        </div>
    </div>
 @stop

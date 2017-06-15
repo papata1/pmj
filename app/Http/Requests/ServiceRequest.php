@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Service;
+use App\Identity_info;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class ServiceRequest extends FormRequest

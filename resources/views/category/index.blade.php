@@ -13,10 +13,10 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                          <div class="col-md-2">
+                          <div class="col-md-3">
                             ข้อมูลผู้เข้ารับบริการ
                           </div>
-                          <div class="col-md-8">  </div>
+                          <div class="col-md-6">  </div>
                           {{ link_to_route('category.create','เพิ่มเรื่องขอเข้ารับบริการ ',null,['class'=>'btn btn-success']) }}
                         </div>
                         <!-- /.panel-heading -->
@@ -27,7 +27,7 @@
                                         <th>ลำดับ</th>
                                         <th>ลักษณะงาน</th>
                                         <th>ประเภทงาน</th>
-                                         <th>การจัดการ</th>
+                                         <th width="70">การจัดการ</th>
                                     </tr>
                                 </thead>
                                 <tbody>

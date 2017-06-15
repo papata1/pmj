@@ -2,10 +2,9 @@
 @section('page_heading','Update')
 @section('content')
 
-<div class="container">
        <div class="row">
-           <div class="col-md-8 col-md-offset-2">.
-               <h1 class="page-header">จัดการเรื่องรับบริการ</h1>
+           <div class="col-md-12">.
+               <h1 class="page-header">แก้ไขเรื่องรับบริการ</h1>
                <div class="panel panel-default">
 
                    <div class="panel-heading"></div>
@@ -43,5 +42,4 @@
               @endif
            </div>
        </div>
-   </div>
 @stop

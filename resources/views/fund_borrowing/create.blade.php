@@ -1,10 +1,11 @@
 @extends('admin.layouts.template')
 @section('page_heading','Crate')
 @section('content')
+
     <div id="page">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">งานกู้ยืมเงินผู้สูงอายุ</h1>
+                    <h1 class="page-header">ลงทะเบียนผู้กู้ยืมเงินผู้สูงอายุ</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -15,9 +16,9 @@
 
                        <div class="row">
                            <div class="col-lg-12">
-                               <div class="panel panel-primary">
+                               <div class="panel panel-default">
                                    <div class="panel-heading">
-                                       ลงทะเบียนผู้กู้ยืมเงินผู้สูงอายุ
+
                                    </div>
                                    <!-- /.panel-heading -->
 
@@ -26,24 +27,27 @@
                                         {!! Form::open(array('route'=>'Fund_borrowing.store','class' => 'form',
                                         'novalidate' => 'novalidate',
                                         'files' => true)) !!}
+
                                            <div class="form-group">
-                                             <label>ปีงบประมาณ</label>
-                                             <select id="year" name="year">
-                                               <option value="2560">2560</option>
-                                               <option value="2559">2559</option>
-                                               <option value="2558">2558</option>
-                                             </select>
+                                            @if($errors->any())
+                                    <ul class="alert alert-danger">
+                                    @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                    </ul>
+                                    @endif
+                                             <label class="col-lg-2">ปีงบประมาณ<label  style="color:red">*</label></label>
+                                             <div class="col-lg-3">
+                                              {!! Form::select('year',['' => ''] + $year, null, ['class' => 'form-control']) !!}
+                                            </div>
                                            </div>
 
-                                           <div >
-                                               <label>วันที่</label>
-                                               <input type="date" id="date" name="date" />
-                                           </div>
+                                               <label class="col-lg-1">วันที่<label  style="color:red">*</label></label>
+                                               <input type="date" id="date" name="date" class="col-lg-3" />
                                            <br />
                                            <div class="col-lg-12"> <br />  </div>
 
-                                      <h4 style="font-weight:bold;">ผู้ยื่นกู้</h4>
-                                      <hr />
+                                      <div class="col-lg-12"><h4 style="font-weight:bold;">ผู้ยื่นกู้</h4><hr /></div>
                                       <div class="col-lg-12"> </div>
                                         <label class="col-lg-2 ">ประเภทกองทุน</label>
                                         <div class="col-md-3">
@@ -52,149 +56,118 @@
                                             <option value="รายกลุ่ม">รายกลุ่ม</option>
                                         </select>
                                         </div>
+                                        <div class="col-lg-7"> <br />  </div>
                                        <div class="col-lg-12"> <br />  </div>
 
                                        <div class="col-lg-6">
-                                           <label>เลขบัตรประชาชนประจำตัว</label>
-                                           <input type="text" id="id_p" name="id_p" />
-                                       </div>
-                                       <div class="col-lg-6">
-                                           <label>บัตรหมดอายุวันที่</label>
-                                           <input type="date"  id="id_exp" name="id_exp"/>&nbsp;&nbsp;
+                                          <label >เลขบัตรประชาชนประจำตัว<label  style="color:red">*</label></label>
+                                          <input type="text"  id="id_p_b" name="id_p"   />
+                                            <button  value="ตรวจสอบ" id="ck_id" type="button" ><i >ตรวจสอบ</i></button>
+                                          </div>
+                                          <div class="col-lg-6" >
+                                           <label >บัตรหมดอายุวันที่<label  style="color:red">*</label></label>
+                                           <input type="date"  id="id_exp" name="id_exp"  />&nbsp;&nbsp;
                                            <input type="checkbox" id="id_exp1" name="id_exp" value="ตลอดชีวิต"  />
                                            <span>ตลอดชีวิต</span>
-                                       </div>
+                                         </div>
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2">คำนำหน้าชื่อ</label>
+                                       <label class="col-lg-2">คำนำหน้าชื่อ<label  style="color:red">*</label></label>
                                        <div class="col-lg-10">
-                                       <input type="radio" class="prefix" id="prefix" name="prefix3" value="นาย" /><span> นาย&nbsp;&nbsp;</span>
-                                       <input type="radio" class="prefix" id="prefix" name="prefix3" value="นาง" /><span> นาง&nbsp;&nbsp;</span>
-                                       <input type="radio" class="prefix" id="prefix" name="prefix3" value="นางสาว" /><span> นางสาว&nbsp;&nbsp;</span>
-                                       <input type="radio" id="prefix1" name="prefix3"  /><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="prefix11" name="prefix3" disabled />
+                                       <input type="radio" class="prefix" id="prefix" name="prefix" value="นาย" /><span> นาย&nbsp;&nbsp;</span>
+                                       <input type="radio" class="prefix" id="prefix" name="prefix" value="นาง" /><span> นาง&nbsp;&nbsp;</span>
+                                       <input type="radio" class="prefix" id="prefix" name="prefix" value="นางสาว" /><span> นางสาว&nbsp;&nbsp;</span>
+                                       <input type="radio" id="prefix1" name="prefix"  /><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="prefix11" name="prefix" disabled />
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">ชื่อ</label>
-                                       <input type="text" class="col-lg-3" id="name" name="name"  />
-                                       <label  class="col-lg-2 text-right">นามสกุล</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="surename" name="surename" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
-
-                                       <label class="col-lg-2 ">ว/ด/ป เกิด</label>
+                                       <label class="col-lg-1 ">ชื่อ<label  style="color:red">*</label></label>
+                                       <input type="text" class="col-lg-2" id="name" name="name"  />
+                                       <div class="col-lg-1"></div>
+                                       <label  class="col-lg-1 text-right">นามสกุล</label>
+                                       <input type="text" class="col-lg-2" id="surename" name="surename" />
+                                       <div class="col-lg-1"></div>
+                                       <label class="col-lg-1 ">วันเกิด</label>
                                        <input type="date" class="col-lg-3" id="dob" name="dob" />
-                                       <div class="col-lg-5">
-                                       </div>
                                        <div class="col-lg-12"> <br />  </div>
-
 
                                        <label class="col-lg-12 " style="color:blue">ที่อยู่ปัจจุบัน</label>
                                        <div class="col-lg-12"> <br />  </div>
                                        <label class="col-lg-2 ">บ้านเลขที่</label>
-                                       <input type="text" class="col-lg-3" id="house_number" name="house_number" />
+                                       <input type="text" class="col-lg-2" id="address" name="address" />
                                        <label  class="col-lg-2 text-right">หมู่บ้าน/อาคาร</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="village" name="village"/>
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="village" name="village"/>
+                                       <label class="col-lg-2 text-right">เลขที่ห้อง</label>
+                                       <input type="text" class="col-lg-2"  id="room_number" name="room_number" />
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">เลขที่ห้อง</label>
-                                       <input type="text" class="col-lg-3"  id="room_number" name="room_number" />
-                                       <label  class="col-lg-2 text-right">ชั้น</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="room_floor" name="room_floor" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
-
-                                       <label class="col-lg-2 ">หมู่ที่</label>
-                                       <input type="text" class="col-lg-3" id="bloc" name="group_home" />
+                                       <label  class="col-lg-2 ">ชั้น</label>
+                                       <input type="text" class="col-lg-2" id="room_floor" name="room_floor" />
+                                       <label class="col-lg-2 text-right">หมู่ที่</label>
+                                       <input type="text" class="col-lg-2" id="bloc" name="group_home" />
                                        <label  class="col-lg-2 text-right">ซอย</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="allet" name="alley" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="allet" name="alley" />
                                        <div class="col-lg-12"> <br />  </div>
 
                                        <label class="col-lg-2 ">ถนน</label>
-                                       <input type="text" class="col-lg-3" id="road" name="road" />
+                                       <input type="text" class="col-lg-2" id="road" name="road" />
                                        <label  class="col-lg-2 text-right">ตำบล/แขวง</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="zone" name="zone" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="zone" name="local" />
+                                       <label class="col-lg-2 text-right">อำเภอ/เขต</label>
+                                       <input type="text" class="col-lg-2 " id="district" name="district" />
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">อำเภอ/เขต</label>
-                                       <input type="text" class="col-lg-3" id="district" name="district" />
-                                       <label  class="col-lg-2 text-right">จังหวัด</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="province" name="province" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
-
-                                       <label class="col-lg-2 ">รหัสไปรษณีย์</label>
-                                       <input type="text" class="col-lg-3" id="zip_code" name="zip_code" />
+                                       <label  class="col-lg-2">จังหวัด</label>
+                                       <input type="text" class="col-lg-2" id="province" name="province" />
+                                       <label class="col-lg-2 text-right">รหัสไปรษณีย์</label>
+                                       <input type="text" class="col-lg-2" id="zip_code" name="zip_code" />
                                        <label  class="col-lg-2 text-right">โทรศัพท์</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="phone" name="phone" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="phone" name="phone" />
                                        <div class="col-lg-12"> <br />  </div>
 
                                        <label class="col-lg-2 " style="color:blue">ที่อยู่ตามทะเบียนบ้าน</label>
                                        <div class="col-lg-10">
-                                       <input type="radio" id="check_live" name="check_live" value="ที่เดี่ยวกับบัตรประชาชน" /><span> ที่เดี่ยวกับบัตรประชาชน&nbsp;&nbsp;</span>
-                                       <input type="radio" id="check_live" name="check_live" value="ที่เดียวกับที่ปัจจุบัน" /><span> ที่เดียวกับที่ปัจจุบัน&nbsp;&nbsp;</span>
-                                       <input type="radio" id="check_live" name="check_live" value="อื่นๆ" /><span> อื่นๆ&nbsp;&nbsp;</span>
+                                       <input type="radio" id="check_live" class="check_live" name="check_live" value="ที่เดี่ยวกับบัตรประชาชน" /><span> ที่เดี่ยวกับบัตรประชาชน&nbsp;&nbsp;</span>
+                                       <input type="radio" id="check_live_0"  name="check_live" value="ที่เดียวกับที่ปัจจุบัน" checked/><span> ที่เดียวกับที่ปัจจุบัน&nbsp;&nbsp;</span>
+                                       <input type="radio" id="check_live" class="check_live" name="check_live" value="อื่นๆ" /><span> อื่นๆ&nbsp;&nbsp;</span>
                                        </div>
-
                                        <div class="col-lg-12"> <br />  </div>
+
+                                        <div id="change">
+
                                        <label class="col-lg-2 ">บ้านเลขที่</label>
-                                       <input type="text" class="col-lg-3" id="house_number1" name="house_number" />
+                                       <input type="text" class="col-lg-2" id="address1" name="address1" />
                                        <label  class="col-lg-2 text-right">หมู่บ้าน/อาคาร</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="village1" name="village1" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="village1" name="village1" />
+                                       <label class="col-lg-2 text-right">เลขที่ห้อง</label>
+                                       <input type="text" class="col-lg-2" id="room_number1" name="room_number1" />
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">เลขที่ห้อง</label>
-                                       <input type="text" class="col-lg-3" id="room_number1" name="room_number1" />
-                                       <label  class="col-lg-2 text-right">ชั้น</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="room_floor1" name="room_floor1" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
-
-                                       <label class="col-lg-2 ">หมู่ที่</label>
-                                       <input type="text" class="col-lg-3" id="bloc1" name="group_home1" />
+                                       <label  class="col-lg-2 ">ชั้น</label>
+                                       <input type="text" class="col-lg-2" id="room_floor1" name="room_floor1" />
+                                       <label class="col-lg-2 text-right ">หมู่ที่</label>
+                                       <input type="text" class="col-lg-2" id="bloc1" name="group_home1" />
                                        <label  class="col-lg-2 text-right">ซอย</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="alley1" name="alley1" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="alley1" name="alley1" />
                                        <div class="col-lg-12"> <br />  </div>
 
                                        <label class="col-lg-2 ">ถนน</label>
-                                       <input type="text" class="col-lg-3" id="road1" name="road1" />
+                                       <input type="text" class="col-lg-2" id="road1" name="road1" />
                                        <label  class="col-lg-2 text-right">ตำบล/แขวง</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="zone1" name="zone1" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="zone1" name="local1" />
+                                       <label class="col-lg-2 text-right">อำเภอ/เขต</label>
+                                       <input type="text" class="col-lg-2" id="district1" name="district1" />
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">อำเภอ/เขต</label>
-                                       <input type="text" class="col-lg-3" id="district1" name="district1" />
-                                       <label  class="col-lg-2 text-right">จังหวัด</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="province1" name="province1" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
-
-                                       <label class="col-lg-2 ">รหัสไปรษณีย์</label>
-                                       <input type="text" class="col-lg-3" id="zip_code1" name="zip_code1" />
+                                       <label  class="col-lg-2 ">จังหวัด</label>
+                                       <input type="text" class="col-lg-2" id="province1" name="province1" />
+                                       <label class="col-lg-2 text-right">รหัสไปรษณีย์</label>
+                                       <input type="text" class="col-lg-2" id="zip_code1" name="zip_code1" />
                                        <label  class="col-lg-2 text-right">โทรศัพท์</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="phone1" name="phone1" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="phone1" name="phone1" />
                                        <div class="col-lg-12"> <br />  </div>
+
+                                       </div>
 
                                        <label class="col-lg-2">ประเภทที่อยู่</label>
                                        <div class="col-lg-10">
@@ -210,37 +183,45 @@
                                        <div class="col-lg-10">
                                        <input type="radio" class="c" id="live_status1" name="live_status" value="1" /><span> เช่า&nbsp;</span><input type="text" id="live_status12" name="c_live_status" disabled/> บาท/เดือน&nbsp;&nbsp;
                                        <input type="radio" class="c" id="live_status11" name="live_status" value="2" /><span> ผ่อน&nbsp;</span><input type="text" id="live_status13" name="c_live_status" disabled/> บาท/เดือน&nbsp;&nbsp;
-                                       <input type="radio" class='live_status' id="live_status" name="live_status" value="เป็นของตนเองปลอดภาระ"/><span> เป็นของตนเองปลอดภาระ&nbsp;&nbsp;</span>
                                        </div>
-                                       <div class="col-lg-12"> <br />  </div>
+
                                        <div class="col-lg-2"></div>
                                        <div class="col-lg-10">
+                                         <input type="radio" class='live_status' id="live_status" name="live_status" value="เป็นของตนเองปลอดภาระ"/><span> เป็นของตนเองปลอดภาระ&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status' id="live_status" name="live_status" value="เป็นของบุคคลอื่น"/><span> เป็นของบุคคลอื่น&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status' id="live_status" name="live_status" value="อาศัยอยู่กับบุตรหลานญาติ"/><span> อาศัยอยู่กับบุตรหลาน/ญาติ&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status' id="live_status" name="live_status" value="บ้านพักสวัสดิการ"/><span> บ้านพักสวัสดิการ&nbsp;&nbsp;</span>
-                                         <input type="radio" class="c" id="live_status111" name="live_status" value="3"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status14" name="c_live_status" disabled/>
-                                       </div>
+                                      </div>
+
+                                       <div class="col-lg-2"></div>
+                                       <div class="col-lg-10">
+                                       <input type="radio" class="c" id="live_status111" name="live_status" value="3"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status14" name="c_live_status" disabled/>
+                                      </div>
+
                                        <div class="col-lg-12"> <br />  </div>
 
 
                                        <label class="col-lg-2 ">อาชีพปัจจุบัน</label>
-                                       <input type="text" class="col-lg-3" id="job" name="job" />
+                                       <input type="text" class="col-lg-3" id="job" name="job_borrow" />
                                        <label  class="col-lg-2 text-right">รายได้/เดือน</label>
                                        <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="income" name="income"/>
+                                       <input type="text" class="col-lg-8" id="income" name="income_borrow"/>
                                        </div>
                                         <div class="col-lg-12"> <br />  </div>
 
 
-                                       <label class="col-lg-2">สถานภาพ</label>
+                                       <label class="col-lg-2 " style="color:blue">สถานภาพ</label>
                                        <div class="col-lg-10">
-                                       <input type="radio" id="m_status" name="m_status"  value="โสด"/> <span> โสด&nbsp;&nbsp;</span>
-                                       <input type="radio" id="m_status" name="m_status"  value="สมรส"/> <span> สมรส&nbsp;</span>
-                                       <input type="radio" id="m_status" name="m_status"  value="อยู่ด้วยกันโดยไม่จดทะเบียนสมรส"/><span> อยู่ด้วยกันโดยไม่จดทะเบียนสมรส&nbsp;&nbsp;</span>
-                                       <input type="radio" id="m_status" name="m_status"  value="หย่าร้าง"/><span> หย่าร้าง&nbsp;&nbsp;</span>
-                                       <input type="radio" id="m_status" name="m_status"  value="หม้าย"/><span> หม้าย&nbsp;&nbsp;</span>
+                                       <input type="radio" id="s_status" name="m_status" checked value="โสด"/> <span> โสด&nbsp;&nbsp;</span>
+                                       <input type="radio" id="m_status" class="ck_s" name="m_status"  value="สมรส"/> <span> สมรส&nbsp;</span>
+                                       <input type="radio" id="m_status" class="ck_s" name="m_status"  value="อยู่ด้วยกันโดยไม่จดทะเบียนสมรส"/><span> อยู่ด้วยกันโดยไม่จดทะเบียนสมรส&nbsp;&nbsp;</span>
+                                       <input type="radio" id="m_status" class="ck_s" name="m_status"  value="หย่าร้าง"/><span> หย่าร้าง&nbsp;&nbsp;</span>
+                                       <input type="radio" id="m_status" class="ck_s" name="m_status"  value="หม้าย"/><span> หม้าย&nbsp;&nbsp;</span>
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
+
+                                       <div id="s">
+
 
                                        <div class="col-lg-6">
                                            <label>เลขบัตรประชาชนประจำตัว</label>
@@ -278,17 +259,27 @@
                                        <div class="col-lg-5">
                                        <input type="text" class="col-lg-8" id="income" name="income"/>
                                        </div>
+                                       </div>
+
                                         <div class="col-lg-12"> <br />  </div>
 
 
-                                        <label class="col-lg-5" >ประสงค์จะขอกู้ยืมเงินกองทุนผู้สูงอายุเป็นจำนวนเงิน</label>
+                                        <label class="col-lg-5" style="color:blue">ประสงค์จะขอกู้ยืมเงินกองทุนผู้สูงอายุเป็นจำนวนเงิน<label  style="color:red">*</label></label>
                                         <input type="text" class="col-lg-3" name="money"  />
                                         <label class="col-lg-4" >บาท</label>
                                         <div class="col-lg-12"> <br />  </div>
 
-                                        <label class="col-lg-3" >เพื่อนำไปประกอบอาชีพ</label>
-                                        <input type="text" class="col-lg-5" name="forwhat" />
-                                        <label class="col-lg-4" > </label>
+                                        <label class="col-lg-3" style="color:blue">เพื่อนำไปประกอบอาชีพ<label  style="color:red">*</label></label>
+                                        <input list="browsers" name="forwhat"class="col-lg-3" />
+                                            <datalist id="browsers">
+                                            <option value="ปศุสัตว์">
+                                            <option value="เกษตรกรรม">
+                                            <option value="ค้าขาย">
+                                            <option value="หัตถกรรม">
+                                            <option value="รับจ้าง/บริการ ">
+                                            </datalist>
+                                         <label  class="col-lg-2 text-right">รายละเอียดอาชีพ</label>
+                                       <input type="text" class="col-lg-3"  name="job_remark" />
                                         <div class="col-lg-12"> <br />  </div>
 
                                         <label class="col-lg-3" >รูปผู้กู้ยืม</label>
@@ -296,27 +287,29 @@
                                         <div class="col-lg-12"> <br />  </div>
                                         <div class="col-lg-12"> <br />  </div>
 
-<!-----------------------------------------------------------------------------------------------------------------------------------------------!--> 
+<!-----------------------------------------------------------------------------------------------------------------------------------------------!-->
+                                <div class="col-lg-12">
+                                <h4 style="font-weight:bold;">ข้อมูลผู้คํ้าประกัน</h4>
+                                <hr />
+                                </div>
+                                <div class="col-lg-12"> <br />  </div>
 
-                           <div class="col-lg-12">
-                           <h4 style="font-weight:bold;">ข้อมูลผู้คํ้าประกัน</h4>
-                           <hr />
-                           </div>
-                           <div class="col-lg-12"> <br />  </div>
+                                      <div class="col-lg-6" >
+                                           <label >เลขบัตรประชาชนประจำตัว<label  style="color:red">*</label></label>
+                                           <input type="text" id="id_p_b1" name="id_p2" />
 
-                             <div class="col-lg-6">
-                                           <label>เลขบัตรประชาชนประจำตัว</label>
-                                           <input type="text" id="id_p" name="id_p2" />
-                                       </div>
+                                            <button  value="ตรวจสอบ" id="ck_id1" type="button" ><i >ตรวจสอบ</i></button>
+                                          </div>
+
                                        <div class="col-lg-6">
-                                           <label>บัตรหมดอายุวันที่</label>
+                                           <label >บัตรหมดอายุวันที่</label>
                                            <input type="date"  id="id_exp5" name="id_exp2"/>&nbsp;&nbsp;
                                            <input type="checkbox" id="id_exp6" name="id_exp2" value="ตลอดชีวิต"  />
                                            <span>ตลอดชีวิต</span>
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2">คำนำหน้าชื่อ</label>
+                                       <label class="col-lg-2">คำนำหน้าชื่อ<label  style="color:red">*</label></label>
                                        <div class="col-lg-10">
                                        <input type="radio" class="prefix1" id="prefix" name="prefix2" value="นาย" /><span> นาย&nbsp;&nbsp;</span>
                                        <input type="radio" class="prefix1" id="prefix" name="prefix2" value="นาง" /><span> นาง&nbsp;&nbsp;</span>
@@ -325,132 +318,109 @@
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">ชื่อ</label>
-                                       <input type="text" class="col-lg-3" id="name" name="name2"  />
-                                       <label  class="col-lg-2 text-right">นามสกุล</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="surename" name="surename2" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
-
-                                       <label class="col-lg-2 ">ว/ด/ป เกิด</label>
+                                       <label class="col-lg-1 ">ชื่อ<label  style="color:red">*</label></label>
+                                       <input type="text" class="col-lg-2" id="name" name="name2"  />
+                                       <div class="col-lg-1"></div>
+                                       <label  class="col-lg-1 text-right">นามสกุล</label>
+                                       <input type="text" class="col-lg-2" id="surename" name="surename2" />
+                                       <div class="col-lg-1"></div>
+                                       <label class="col-lg-1 ">วันเกิด</label>
                                        <input type="date" class="col-lg-3" id="dob" name="dob2" />
                                        <div class="col-lg-12"> <br />  </div>
-
 
                                        <label class="col-lg-12 " style="color:blue">ที่อยู่ปัจจุบัน</label>
                                        <div class="col-lg-12"> <br />  </div>
                                        <label class="col-lg-2 ">บ้านเลขที่</label>
-                                       <input type="text" class="col-lg-3" id="address" name="address2" />
+                                       <input type="text" class="col-lg-2" id="address" name="address2" />
                                        <label  class="col-lg-2 text-right">หมู่บ้าน/อาคาร</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="village" name="village2"/>
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="village" name="village2"/>
+                                       <label class="col-lg-2 text-right">เลขที่ห้อง</label>
+                                       <input type="text" class="col-lg-2"  id="room_number" name="room_number2" />
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">เลขที่ห้อง</label>
-                                       <input type="text" class="col-lg-3"  id="room_number" name="room_number2" />
-                                       <label  class="col-lg-2 text-right">ชั้น</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="room_floor" name="room_floor2" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
-
-                                       <label class="col-lg-2 ">หมู่ที่</label>
-                                       <input type="text" class="col-lg-3" id="bloc" name="group_home2" />
+                                       <label  class="col-lg-2 ">ชั้น</label>
+                                       <input type="text" class="col-lg-2" id="room_floor" name="room_floor2" />
+                                       <label class="col-lg-2 text-right">หมู่ที่</label>
+                                       <input type="text" class="col-lg-2" id="bloc" name="group_home2" />
                                        <label  class="col-lg-2 text-right">ซอย</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="allet" name="alley2" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="allet" name="alley2" />
                                        <div class="col-lg-12"> <br />  </div>
 
                                        <label class="col-lg-2 ">ถนน</label>
-                                       <input type="text" class="col-lg-3" id="road" name="road2" />
+                                       <input type="text" class="col-lg-2" id="road" name="road2" />
                                        <label  class="col-lg-2 text-right">ตำบล/แขวง</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="local" name="local2" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="zone" name="local2" />
+                                       <label class="col-lg-2 text-right">อำเภอ/เขต</label>
+                                       <input type="text" class="col-lg-2 " id="district" name="district2" />
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">อำเภอ/เขต</label>
-                                       <input type="text" class="col-lg-3" id="district" name="district2" />
-                                       <label  class="col-lg-2 text-right">จังหวัด</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="province" name="province2" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
-
-                                       <label class="col-lg-2 ">รหัสไปรษณีย์</label>
-                                       <input type="text" class="col-lg-3" id="zip_code" name="zip_code2" />
+                                       <label  class="col-lg-2">จังหวัด</label>
+                                       <input type="text" class="col-lg-2" id="province" name="province2" />
+                                       <label class="col-lg-2 text-right">รหัสไปรษณีย์</label>
+                                       <input type="text" class="col-lg-2" id="zip_code" name="zip_code2" />
                                        <label  class="col-lg-2 text-right">โทรศัพท์</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="phone" name="phone2" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="phone" name="phone2" />
                                        <div class="col-lg-12"> <br />  </div>
+
 
                                        <label class="col-lg-2 " style="color:blue">ที่อยู่ตามทะเบียนบ้าน</label>
                                        <div class="col-lg-10">
-                                       <input type="radio" id="check_live" name="check_live1" value="ที่เดี่ยวกับบัตรประชาชน" /><span> ที่เดี่ยวกับบัตรประชาชน&nbsp;&nbsp;</span>
-                                       <input type="radio" id="check_live" name="check_live1" value="ที่เดียวกับที่ปัจจุบัน" /><span> ที่เดียวกับที่ปัจจุบัน&nbsp;&nbsp;</span>
-                                       <input type="radio" id="check_live" name="check_live1" value="อื่นๆ" /><span> อื่นๆ&nbsp;&nbsp;</span>
+                                       <input type="radio" id="check_live" class="check_live1" name="check_live1" value="ที่เดี่ยวกับบัตรประชาชน" /><span> ที่เดี่ยวกับบัตรประชาชน&nbsp;&nbsp;</span>
+                                       <input type="radio" id="check_live_1"  name="check_live1" value="ที่เดียวกับที่ปัจจุบัน" checked/><span> ที่เดียวกับที่ปัจจุบัน&nbsp;&nbsp;</span>
+                                       <input type="radio" id="check_live" class="check_live1" name="check_live1" value="อื่นๆ" /><span> อื่นๆ&nbsp;&nbsp;</span>
                                        </div>
-
                                        <div class="col-lg-12"> <br />  </div>
-                                       <label class="col-lg-2 ">บ้านเลขที่</label>
-                                       <input type="text" class="col-lg-3" id="house_number1" name="address3" />
+
+
+                                      <div id="change1">
+
+                                        <label class="col-lg-2 ">บ้านเลขที่</label>
+                                       <input type="text" class="col-lg-2" id="address1" name="address3" />
                                        <label  class="col-lg-2 text-right">หมู่บ้าน/อาคาร</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="village1" name="village3" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="village1" name="village3" />
+                                       <label class="col-lg-2 text-right">เลขที่ห้อง</label>
+                                       <input type="text" class="col-lg-2" id="room_number1" name="room_number3" />
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">เลขที่ห้อง</label>
-                                       <input type="text" class="col-lg-3" id="room_number1" name="room_number3" />
-                                       <label  class="col-lg-2 text-right">ชั้น</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="room_floor1" name="room_floor3" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
-
-                                       <label class="col-lg-2 ">หมู่ที่</label>
-                                       <input type="text" class="col-lg-3" id="bloc1" name="group_home3" />
+                                       <label  class="col-lg-2 ">ชั้น</label>
+                                       <input type="text" class="col-lg-2" id="room_floor1" name="room_floor3" />
+                                       <label class="col-lg-2 text-right ">หมู่ที่</label>
+                                       <input type="text" class="col-lg-2" id="bloc1" name="group_home3" />
                                        <label  class="col-lg-2 text-right">ซอย</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="alley1" name="alley3" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="alley1" name="alley3" />
                                        <div class="col-lg-12"> <br />  </div>
 
                                        <label class="col-lg-2 ">ถนน</label>
-                                       <input type="text" class="col-lg-3" id="road1" name="road3" />
+                                       <input type="text" class="col-lg-2" id="road1" name="road3" />
                                        <label  class="col-lg-2 text-right">ตำบล/แขวง</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="local1" name="local3" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="zone1" name="local3" />
+                                       <label class="col-lg-2 text-right">อำเภอ/เขต</label>
+                                       <input type="text" class="col-lg-2" id="district1" name="district3" />
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">อำเภอ/เขต</label>
-                                       <input type="text" class="col-lg-3" id="district1" name="district3" />
-                                       <label  class="col-lg-2 text-right">จังหวัด</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="province1" name="province3" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
-
-                                       <label class="col-lg-2 ">รหัสไปรษณีย์</label>
-                                       <input type="text" class="col-lg-3" id="zip_code1" name="zip_code3" />
+                                       <label  class="col-lg-2 ">จังหวัด</label>
+                                       <input type="text" class="col-lg-2" id="province1" name="province3" />
+                                       <label class="col-lg-2 text-right">รหัสไปรษณีย์</label>
+                                       <input type="text" class="col-lg-2" id="zip_code1" name="zip_code3" />
                                        <label  class="col-lg-2 text-right">โทรศัพท์</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="phone1" name="phone3" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="phone1" name="phone3" />
                                        <div class="col-lg-12"> <br />  </div>
+
+
+
+
+
+                                       </div>
+
+
 
                                        <label class="col-lg-2">ประเภทที่อยู่</label>
                                        <div class="col-lg-10">
-                                       <input type="radio" class="live_cate1" id="live_cate" name="live_cate1" value="บ้าน" /><span> บ้าน&nbsp;&nbsp;</span>
-                                       <input type="radio" class="live_cate1" id="live_cate" name="live_cate1" value="ทาวน์เฮาส์" /><span> ทาวน์เฮาส์&nbsp;&nbsp;</span>
-                                       <input type="radio" class="live_cate1" id="live_cate" name="live_cate1" value="คอนโดมิเนียม" /><span> คอนโดมิเนียม&nbsp;&nbsp;</span>
-                                       <input type="radio" class="live_cate1" id="live_cate" name="live_cate1" value="อพาร์ทเม้นท์หอพักแฟลต" /><span> อพาร์ทเม้นท์/หอพัก/แฟลต&nbsp;&nbsp;</span>
-                                       <input type="radio"  id="live_cate1" name="live_cate1"  /><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_cate3" name="live_cate1" disabled/>
+                                       <input type="radio" class="live_cate7" id="live_cate" name="live_cate1" value="บ้าน" /><span> บ้าน&nbsp;&nbsp;</span>
+                                       <input type="radio" class="live_cate7" id="live_cate" name="live_cate1" value="ทาวน์เฮาส์" /><span> ทาวน์เฮาส์&nbsp;&nbsp;</span>
+                                       <input type="radio" class="live_cate7" id="live_cate" name="live_cate1" value="คอนโดมิเนียม" /><span> คอนโดมิเนียม&nbsp;&nbsp;</span>
+                                       <input type="radio" class="live_cate7" id="live_cate" name="live_cate1" value="อพาร์ทเม้นท์หอพักแฟลต" /><span> อพาร์ทเม้นท์/หอพัก/แฟลต&nbsp;&nbsp;</span>
+                                       <input type="radio"  id="live_cate6" name="live_cate1"  /><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_cate66" name="live_cate1" disabled/>
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
 
@@ -458,19 +428,23 @@
                                        <div class="col-lg-10">
                                        <input type="radio" class="b" id="live_status2" name="live_status1" value="1" /><span> เช่า&nbsp;</span><input type="text" id="live_status22" name="c_live_status1" disabled/> บาท/เดือน&nbsp;&nbsp;
                                        <input type="radio" class="b" id="live_status3" name="live_status1" value="2" /><span> ผ่อน&nbsp;</span><input type="text" id="live_status33" name="c_live_status1" disabled/> บาท/เดือน&nbsp;&nbsp;
-                                       <input type="radio" class='live_status1' id="live_status" name="live_status1" value="เป็นของตนเองปลอดภาระ"/><span> เป็นของตนเองปลอดภาระ&nbsp;&nbsp;</span>
                                        </div>
-                                       <div class="col-lg-12"> <br />  </div>
+
                                        <div class="col-lg-2"></div>
                                        <div class="col-lg-10">
+                                         <input type="radio" class='live_status1' id="live_status" name="live_status1" value="เป็นของตนเองปลอดภาระ"/><span> เป็นของตนเองปลอดภาระ&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status1' id="live_status" name="live_status1" value="เป็นของบุคคลอื่น"/><span> เป็นของบุคคลอื่น&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status1' id="live_status" name="live_status1" value="อาศัยอยู่กับบุตรหลานญาติ"/><span> อาศัยอยู่กับบุตรหลาน/ญาติ&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status1' id="live_status" name="live_status1" value="บ้านพักสวัสดิการ"/><span> บ้านพักสวัสดิการ&nbsp;&nbsp;</span>
-                                         <input type="radio" class="b" id="live_status4" name="live_status1" value="3"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status44" name="c_live_status1" disabled/>
                                        </div>
+
+                                       <div class="col-lg-2"></div>
+                                       <div class="col-lg-10">
+                                         <input type="radio" class="b" id="live_status4" name="live_status1" value="3"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status44" name="c_live_status1" disabled/>
+                                      </div>
                                        <div class="col-lg-12"> <br />  </div>
 
-                           <label class="col-lg-2">ความสัมพันธ์กับผู้กู้</label>
+                           <label class="col-lg-2">สัมพันธ์กับผู้กู้</label>
                            <div class="col-lg-10">
                            <input type="radio" name="relation" value="บุตร" /><span> บุตร&nbsp;&nbsp;</span>
                            <input type="radio" name="relation" value="ญาติ"/><span> ญาติ&nbsp;&nbsp;</span>
@@ -479,91 +453,56 @@
                            <div class="col-lg-12"> <br />  </div>
 
                            <label class="col-lg-2 ">อาชีพปัจจุบัน</label>
-                           <input type="text" class="col-lg-3"   name="job_borrow" />
-                           <label  class="col-lg-7 text-right"></label>
-                           <div class="col-lg-12"> <br />  </div>
-
-                           <label class="col-lg-2 ">ตำแหน่ง</label>
-                           <input type="text" class="col-lg-3"   name="role" />
+                           <input type="text" class="col-lg-2"   name="job1" />
+                           <label class="col-lg-2 text-right">ตำแหน่ง</label>
+                           <input type="text" class="col-lg-2"   name="role" />
                            <label  class="col-lg-2 text-right">รายได้/เดือน</label>
-                           <div class="col-lg-5">
-                           <input type="text" class="col-lg-8" name="income_borrow" />
-                           </div>
+                           <input type="text" class="col-lg-2" name="income1" />
                            <div class="col-lg-12"> <br />  </div>
 
-                           <label class="col-lg-2 ">ชื่อบริษัท/สำนักงาน</label>
-                           <input type="text" class="col-lg-3"  name="bname" />
+                           <label class="col-lg-2 ">ชื่อสำนักงาน</label>
+                           <input type="text" class="col-lg-2"  name="bname" />
                            <label  class="col-lg-2 text-right">เลขที่</label>
-                           <div class="col-lg-5">
-                           <input type="text" class="col-lg-8" name="address4"/>
-                           </div>
+                           <input type="text" class="col-lg-2" name="address4"/>
+                           <label class="col-lg-2 text-right">อาคาร</label>
+                           <input type="text" class="col-lg-2" name="village4" />
                            <div class="col-lg-12"> <br />  </div>
 
-                           <label class="col-lg-2 ">อาคาร</label>
-                           <input type="text" class="col-lg-3" name="village4" />
-                           <label  class="col-lg-2 text-right">เลขที่ห้อง</label>
-                           <div class="col-lg-5">
-                           <input type="text" class="col-lg-8" name="room_number4"/>
-                           </div>
-                           <div class="col-lg-12"> <br />  </div>
-
-                           <label class="col-lg-2 ">ชั้น</label>
-                           <input type="text" class="col-lg-3" name="room_floor4" />
+                           <label  class="col-lg-2 ">เลขที่ห้อง</label>
+                           <input type="text" class="col-lg-2" name="room_number4"/>
+                           <label class="col-lg-2 text-right">ชั้น</label>
+                           <input type="text" class="col-lg-2" name="room_floor4" />
                            <label  class="col-lg-2 text-right">หมู่ที่</label>
-                           <div class="col-lg-5">
-                           <input type="text" class="col-lg-8" name="group_home4"/>
-                           </div>
+                           <input type="text" class="col-lg-2" name="group_home4"/>
                            <div class="col-lg-12"> <br />  </div>
 
                            <label class="col-lg-2 ">ตรอก/ซอย</label>
-                           <input type="text" class="col-lg-3"  name="alley4"/>
+                           <input type="text" class="col-lg-2"  name="alley4"/>
                            <label  class="col-lg-2 text-right">ถนน</label>
-                           <div class="col-lg-5">
-                           <input type="text" class="col-lg-8" name="road4"/>
-                           </div>
+                           <input type="text" class="col-lg-2" name="road4"/>
+                           <label class="col-lg-2 text-right">ตำบล/แขวง</label>
+                           <input type="text" class="col-lg-2"  name="local4"/>
                            <div class="col-lg-12"> <br />  </div>
 
-
-                           <label class="col-lg-2 ">ตำบล/แขวง</label>
-                           <input type="text" class="col-lg-3"  name="local4"/>
-                           <label  class="col-lg-2 text-right">อำเภอ/เขต</label>
-                           <div class="col-lg-5">
-                           <input type="text" class="col-lg-8" name="district4"/>
-                           </div>
-                           <div class="col-lg-12"> <br />  </div>
-
-                           <label class="col-lg-2 ">จังหวัด</label>
-                           <input type="text" class="col-lg-3" name="province4"  />
+                           <label  class="col-lg-2 ">อำเภอ/เขต</label>
+                           <input type="text" class="col-lg-2" name="district4"/>
+                           <label class="col-lg-2 text-right">จังหวัด</label>
+                           <input type="text" class="col-lg-2" name="province4"  />
                            <label  class="col-lg-2 text-right">รหัสไปรษณีย์</label>
-                           <div class="col-lg-5">
-                           <input type="text" class="col-lg-8" name="zip_code4"/>
-                           </div>
+                           <input type="text" class="col-lg-2" name="zip_code4"/>
                            <div class="col-lg-12"> <br />  </div>
 
                            <label class="col-lg-2 ">โทรศัพท์ที่ทำงาน</label>
-                           <input type="text" class="col-lg-3" name="phone_job" />
+                           <input type="text" class="col-lg-2" name="phone_job" />
                            <label  class="col-lg-2 text-right">โทรศัพท์มือถือ</label>
-                           <div class="col-lg-5">
-                           <input type="text" class="col-lg-8" name="phone4"/>
-                           </div>
+                           <input type="text" class="col-lg-2" name="phone4"/>
                            <div class="col-lg-12"> <br />  </div>
 
                            <div class="col-lg-12"> <br />  </div>
                            <div class="col-lg-12">
-
- <!-----------------------------------------------------------------------------------------------------------------------------------------------!--> 
-
+ <!-----------------------------------------------------------------------------------------------------------------------------------------------!-->
                            <h4 style="font-weight:bold;">ข้อมูลอื่นๆ</h4>
                            <hr />
-                           </div>
-                           <div class="col-lg-12"> <br />  </div>
-
-                           <label class="col-lg-12 " style="color:red;" >กรณีเปลี่ยนชื่อ</label>
-                           <label class="col-lg-2 ">ชื่อใหม่</label>
-                           <input type="text" class="col-lg-3" name="newname" />
-                           <label  class="col-lg-2 text-right">นามสกุล</label>
-                           <div class="col-lg-5">
-                           <input type="text" class="col-lg-8"  name="newsname"/>
                            </div>
                            <div class="col-lg-12"> <br />  </div>
 
@@ -574,10 +513,9 @@
                            </div>
                            <div class="col-lg-12"> <br />  </div><div class="col-lg-12"> <br />  </div>
 
-
                            <h4><label class="col-lg-12 "  >ข้อมูลทายาท</label></h4>
 
-                         <div class="col-lg-6">
+                                      <div class="col-lg-6">
                                            <label>เลขบัตรประชาชนประจำตัว</label>
                                            <input type="text" id="id_p" name="id_p5" />
                                        </div>
@@ -598,124 +536,98 @@
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">ชื่อ</label>
-                                       <input type="text" class="col-lg-3" id="name" name="name5"  />
-                                       <label  class="col-lg-2 text-right">นามสกุล</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="surename" name="surename5" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
-
-                                       <label class="col-lg-2 ">ว/ด/ป เกิด</label>
+                                       <label class="col-lg-1 ">ชื่อ</label>
+                                       <input type="text" class="col-lg-2" id="name" name="name5"  />
+                                       <div class="col-lg-1"></div>
+                                       <label  class="col-lg-1 text-right">นามสกุล</label>
+                                       <input type="text" class="col-lg-2" id="surename" name="surename5" />
+                                       <div class="col-lg-1"></div>
+                                       <label class="col-lg-1 ">วันเกิด</label>
                                        <input type="date" class="col-lg-3" id="dob" name="dob5" />
                                        <div class="col-lg-12"> <br />  </div>
-
 
                                        <label class="col-lg-12 " style="color:blue">ที่อยู่ปัจจุบัน</label>
                                        <div class="col-lg-12"> <br />  </div>
                                        <label class="col-lg-2 ">บ้านเลขที่</label>
-                                       <input type="text" class="col-lg-3" id="address" name="address5" />
+                                       <input type="text" class="col-lg-2" id="house_number" name="address5" />
                                        <label  class="col-lg-2 text-right">หมู่บ้าน/อาคาร</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="village" name="village5"/>
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="village" name="village5"/>
+                                       <label class="col-lg-2 text-right">เลขที่ห้อง</label>
+                                       <input type="text" class="col-lg-2"  id="room_number" name="room_number5" />
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">เลขที่ห้อง</label>
-                                       <input type="text" class="col-lg-3"  id="room_number" name="room_number5" />
-                                       <label  class="col-lg-2 text-right">ชั้น</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="room_floor" name="room_floor5" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
-
-                                       <label class="col-lg-2 ">หมู่ที่</label>
-                                       <input type="text" class="col-lg-3" id="bloc" name="group_home5" />
+                                       <label  class="col-lg-2 ">ชั้น</label>
+                                       <input type="text" class="col-lg-2" id="room_floor" name="room_floor5" />
+                                       <label class="col-lg-2 text-right">หมู่ที่</label>
+                                       <input type="text" class="col-lg-2" id="bloc" name="group_home5" />
                                        <label  class="col-lg-2 text-right">ซอย</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="allet" name="alley5" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="allet" name="alley5" />
                                        <div class="col-lg-12"> <br />  </div>
 
                                        <label class="col-lg-2 ">ถนน</label>
-                                       <input type="text" class="col-lg-3" id="road" name="road5" />
+                                       <input type="text" class="col-lg-2" id="road" name="road5" />
                                        <label  class="col-lg-2 text-right">ตำบล/แขวง</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="local" name="local5" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="zone" name="zone5" />
+                                       <label class="col-lg-2 text-right">อำเภอ/เขต</label>
+                                       <input type="text" class="col-lg-2 " id="district" name="district5" />
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">อำเภอ/เขต</label>
-                                       <input type="text" class="col-lg-3" id="district" name="district5" />
-                                       <label  class="col-lg-2 text-right">จังหวัด</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="province" name="province5" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
-
-                                       <label class="col-lg-2 ">รหัสไปรษณีย์</label>
-                                       <input type="text" class="col-lg-3" id="zip_code" name="zip_code5" />
+                                       <label  class="col-lg-2">จังหวัด</label>
+                                       <input type="text" class="col-lg-2" id="province" name="province5" />
+                                       <label class="col-lg-2 text-right">รหัสไปรษณีย์</label>
+                                       <input type="text" class="col-lg-2" id="zip_code" name="zip_code5" />
                                        <label  class="col-lg-2 text-right">โทรศัพท์</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="phone" name="phone5" />
-                                       </div>
+                                       <input type="text" class="col-lg-2" id="phone" name="phone5" />
                                        <div class="col-lg-12"> <br />  </div>
 
                                        <label class="col-lg-2 " style="color:blue">ที่อยู่ตามทะเบียนบ้าน</label>
                                        <div class="col-lg-10">
-                                       <input type="radio" id="check_live" name="check_live5" value="ที่เดี่ยวกับบัตรประชาชน" /><span> ที่เดี่ยวกับบัตรประชาชน&nbsp;&nbsp;</span>
-                                       <input type="radio" id="check_live" name="check_live5" value="ที่เดียวกับที่ปัจจุบัน" /><span> ที่เดียวกับที่ปัจจุบัน&nbsp;&nbsp;</span>
-                                       <input type="radio" id="check_live" name="check_live5" value="อื่นๆ" /><span> อื่นๆ&nbsp;&nbsp;</span>
-                                       </div>
-
-                                       <div class="col-lg-12"> <br />  </div>
-                                       <label class="col-lg-2 ">บ้านเลขที่</label>
-                                       <input type="text" class="col-lg-3" id="house_number1" name="address6" />
-                                       <label  class="col-lg-2 text-right">หมู่บ้าน/อาคาร</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="village1" name="village6" />
+                                       <input type="radio" id="check_live" class="check_live2" name="check_live5" value="ที่เดี่ยวกับบัตรประชาชน" /><span> ที่เดี่ยวกับบัตรประชาชน&nbsp;&nbsp;</span>
+                                       <input type="radio" id="check_live_2" name="check_live5" value="ที่เดียวกับที่ปัจจุบัน" checked /><span> ที่เดียวกับที่ปัจจุบัน&nbsp;&nbsp;</span>
+                                       <input type="radio" id="check_live" class="check_live2" name="check_live5" value="อื่นๆ" /><span> อื่นๆ&nbsp;&nbsp;</span>
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">เลขที่ห้อง</label>
-                                       <input type="text" class="col-lg-3" id="room_number1" name="room_number6" />
-                                       <label  class="col-lg-2 text-right">ชั้น</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="room_floor1" name="room_floor6" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">หมู่ที่</label>
-                                       <input type="text" class="col-lg-3" id="bloc1" name="group_home6" />
-                                       <label  class="col-lg-2 text-right">ซอย</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="alley1" name="alley6" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">ถนน</label>
-                                       <input type="text" class="col-lg-3" id="road1" name="road6" />
-                                       <label  class="col-lg-2 text-right">ตำบล/แขวง</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="local1" name="local6" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
+                                       <div id="change2">
 
-                                       <label class="col-lg-2 ">อำเภอ/เขต</label>
-                                       <input type="text" class="col-lg-3" id="district1" name="district6" />
-                                       <label  class="col-lg-2 text-right">จังหวัด</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="province1" name="province6" />
-                                       </div>
-                                       <div class="col-lg-12"> <br />  </div>
 
-                                       <label class="col-lg-2 ">รหัสไปรษณีย์</label>
-                                       <input type="text" class="col-lg-3" id="zip_code1" name="zip_code6" />
-                                       <label  class="col-lg-2 text-right">โทรศัพท์</label>
-                                       <div class="col-lg-5">
-                                       <input type="text" class="col-lg-8" id="phone1" name="phone6" />
+                                         <label class="col-lg-2 ">บ้านเลขที่</label>
+                                         <input type="text" class="col-lg-2" id="house_number" name="address6" />
+                                         <label  class="col-lg-2 text-right">หมู่บ้าน/อาคาร</label>
+                                         <input type="text" class="col-lg-2" id="village" name="village6"/>
+                                         <label class="col-lg-2 text-right">เลขที่ห้อง</label>
+                                         <input type="text" class="col-lg-2"  id="room_number" name="room_number6" />
+                                         <div class="col-lg-12"> <br />  </div>
+
+                                         <label  class="col-lg-2 ">ชั้น</label>
+                                         <input type="text" class="col-lg-2" id="room_floor" name="room_floor6" />
+                                         <label class="col-lg-2 text-right">หมู่ที่</label>
+                                         <input type="text" class="col-lg-2" id="bloc" name="group_home6" />
+                                         <label  class="col-lg-2 text-right">ซอย</label>
+                                         <input type="text" class="col-lg-2" id="allet" name="alley6" />
+                                         <div class="col-lg-12"> <br />  </div>
+
+                                         <label class="col-lg-2 ">ถนน</label>
+                                         <input type="text" class="col-lg-2" id="road" name="road6" />
+                                         <label  class="col-lg-2 text-right">ตำบล/แขวง</label>
+                                         <input type="text" class="col-lg-2" id="zone" name="zone6" />
+                                         <label class="col-lg-2 text-right">อำเภอ/เขต</label>
+                                         <input type="text" class="col-lg-2 " id="district" name="district6" />
+                                         <div class="col-lg-12"> <br />  </div>
+
+                                         <label  class="col-lg-2">จังหวัด</label>
+                                         <input type="text" class="col-lg-2" id="province" name="province6" />
+                                         <label class="col-lg-2 text-right">รหัสไปรษณีย์</label>
+                                         <input type="text" class="col-lg-2" id="zip_code" name="zip_code6" />
+                                         <label  class="col-lg-2 text-right">โทรศัพท์</label>
+                                         <input type="text" class="col-lg-2" id="phone" name="phone6" />
+                                         <div class="col-lg-12"> <br />  </div>
+
+
                                        </div>
-                                       <div class="col-lg-12"> <br />  </div>
+
 
                                        <label class="col-lg-2">ประเภทที่อยู่</label>
                                        <div class="col-lg-10">
@@ -731,14 +643,18 @@
                                        <div class="col-lg-10">
                                        <input type="radio" class="a" id="live_status21" name="live_status5" value="1" /><span> เช่า&nbsp;</span><input type="text" id="live_status221" name="c_live_status2" disabled/> บาท/เดือน&nbsp;&nbsp;
                                        <input type="radio" class="a" id="live_status31" name="live_status5" value="2" /><span> ผ่อน&nbsp;</span><input type="text" id="live_status331" name="c_live_status2" disabled/> บาท/เดือน&nbsp;&nbsp;
-                                       <input type="radio" class='live_status2' id="live_status" name="live_statuS5" value="เป็นของตนเองปลอดภาระ"/><span> เป็นของตนเองปลอดภาระ&nbsp;&nbsp;</span>
                                        </div>
-                                       <div class="col-lg-12"> <br />  </div>
+
                                        <div class="col-lg-2"></div>
                                        <div class="col-lg-10">
+                                         <input type="radio" class='live_status2' id="live_status" name="live_statuS5" value="เป็นของตนเองปลอดภาระ"/><span> เป็นของตนเองปลอดภาระ&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status2' id="live_status" name="live_status5" value="เป็นของบุคคลอื่น"/><span> เป็นของบุคคลอื่น&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status2' id="live_status" name="live_status5" value="อาศัยอยู่กับบุตรหลานญาติ"/><span> อาศัยอยู่กับบุตรหลาน/ญาติ&nbsp;&nbsp;</span>
                                          <input type="radio" class='live_status2' id="live_status" name="live_status5" value="บ้านพักสวัสดิการ"/><span> บ้านพักสวัสดิการ&nbsp;&nbsp;</span>
+                                       </div>
+
+                                       <div class="col-lg-2"></div>
+                                       <div class="col-lg-10">
                                          <input type="radio" class="a" id="live_status41" name="live_status5" value="3"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status441" name="c_live_status2" disabled/>
                                        </div>
                                        <div class="col-lg-12"> <br />  </div>
@@ -747,9 +663,6 @@
 
 
 
-
-
- 
                                  {!! Form::hidden('category', null,['id' => 'category']) !!}
                                  {!! Form::hidden('class', null,['id' => 'class']) !!}
 
@@ -757,41 +670,36 @@
 
 
                                       <div class="form-group col-lg-12" >
-                                        {{ link_to_route('service.create','ย้อนกลับ',null,['class'=>'btn btn-danger']) }}                                       
                                         {!! Form::button('ลงทะเบียนผู้กู้ยืม',['type'=>'submit','class'=>'btn btn-primary','id'=>'add1']) !!}
                                       </div>
 
 
                                     {!! Form::close() !!}
 
-
                                    </div>
                                    <!-- /.panel-body -->
-                                    @if($errors->any())
-                                    <ul class="alert alert-danger">
-                                    @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                    @endforeach
-                                    </ul>
-                                    @endif
-                               </div>
-                               <!-- /.panel -->
+
+                                  </div>
                            </div>
-                           <!-- /.col-lg-12 -->
+                       <!-- /.row -->
+
+                        </div>
                        </div>
                        <!-- /.row -->
 
                    </div>
                    <!-- /#page-wrapper -->
 
-               </div>
-               <!-- /#wrapper -->
+
 <script src="{{asset('/assets/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <script>
     $(document).ready(function() {
 
                 //             alert(5);
-                 var a;  
+                 var a;
+
+
+
          $('#id_exp1').on('click',function(){
               if(a==1){
               $("#id_exp").prop('disabled', false);
@@ -886,7 +794,16 @@
               $("#live_cate11").val('');
               $("#live_cate11").prop('disabled', true);
           });
-          
+
+           $('#live_cate6').on('click',function(){
+              $("#live_cate66").prop('disabled', false);
+          });
+           $('.live_cate7').on('click',function(){
+              $("#live_cate66").val('');
+              $("#live_cate66").prop('disabled', true);
+          });
+
+
           $('#prefix1').on('click',function(){
               $("#prefix11").prop('disabled', false);
           });
@@ -993,7 +910,7 @@
               $("#live_status221").prop('disabled', true);
               $("#live_status221").val('');
           });
-          
+
 
          $('#add1').click(function () {
               //$('#c_live_status').val($('.c').val());
@@ -1002,7 +919,102 @@
                $('#class').val('borrow');
         });
 
-    });
+//-----------------------------------------------------------------------------------------------
+
+        $('#change').hide();
+        $('#change1').hide();
+        $('#change2').hide();
+
+        $('#check_live_0').on('click',function(){
+           $('#change').hide();
+         });
+
+         $('.check_live').on('click',function(){
+            $('#change').show();
+        });
+
+        $('#check_live_1').on('click',function(){
+           $('#change1').hide();
+         });
+
+         $('.check_live1').on('click',function(){
+            $('#change1').show();
+        });
+
+        $('#check_live_2').on('click',function(){
+           $('#change2').hide();
+         });
+
+         $('.check_live2').on('click',function(){
+            $('#change2').show();
+        });
+
+//-------------------------------------------------------------------------
+$('#s').hide();
+    $('#s_status').on('click',function(){
+           $('#s').hide();
+         });
+
+         $('.ck_s').on('click',function(){
+            $('#s').show();
+        });
+
+
+function isNumber(obj) { return !isNaN(parseFloat(obj)) };
+
+        var val = <?php echo json_encode($ser1 ); ?>;
+        var c = val.length;
+        $('#ck_id').on('click',function(){
+            var a = $('#id_p_b').val();
+            var c1 = 0;
+            if(a.length == 13){
+            for (i = 0; i < val.length; i++) {
+              if(val[i] == $('#id_p_b').val()){
+                    $('#id_p_b').val('');
+                    alert('หมายเลขบัตรประชาชนนี้ถูกใช้งานไปแล้ว');
+                   // c1++;
+              }else{
+                  c1++;
+                  if(c1 == c){
+                    alert('ใช้งานได้');
+
+                    }
+              }
+
+            }
+            }else{
+                alert('หมายเลขบัตรประชาชนต้องมี13หลัก');
+            }
+         });
+
+          var val1 = <?php echo json_encode($ser1 ); ?>;
+        var c1 = val1.length;
+        $('#ck_id1').on('click',function(){
+            var a1 = $('#id_p_b1').val();
+            var c11 = 0;
+            if(a1.length == 13){
+            for (i = 0; i < val.length; i++) {
+              if(val1[i] == $('#id_p_b1').val()){
+                    $('#id_p_b1').val('');
+                    alert('หมายเลขบัตรประชาชนนี้ถูกใช้งานไปแล้ว');
+                   // c1++;
+              }else{
+                  c11++;
+                  if(c11 == c1){
+                    alert('ใช้งานได้');
+
+                    }
+              }
+
+            }
+            }else{
+                alert('หมายเลขบัตรประชาชนต้องมี13หลัก');
+            }
+         });
+
+
+
+ });
 
 </script>
 @stop

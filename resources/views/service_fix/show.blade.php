@@ -1,0 +1,433 @@
+@extends('admin.layouts.template')
+@section('page_heading','Crate')
+@section('content')
+    <div id="page">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">แสดงผู้รับบริการ</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+                       <!-- /.row -->
+                       {{ link_to_route('service_fix.index','ย้อนกลับ',null,['class'=>'btn btn-default pull-right']) }}
+                       <br />
+                       <br />
+
+                       <div class="row">
+                           <div class="col-lg-12">
+                               <div class="panel panel-default">
+                                   <div class="panel-heading">
+                                       
+                                   </div>
+                                   <!-- /.panel-heading -->
+
+                                       <div class="panel-body">
+                                        {!! Form::model($service,array('route'=>['service_fix.update',$service->id],'method'=>'PUT','novalidate' => 'novalidate','files' => true)) !!}
+
+                                           <div class="form-group">
+                                             <label class="col-lg-2">ปีงบประมาณ</label>
+                                             <div class="col-lg-4">
+                                              {!! Form::select('year',['' => ''] + $year, null, ['class' => 'form-control']) !!}
+                                            </div>
+                                           </div>
+
+                                           <div >
+                                               <label class="col-lg-1">วันที่</label>
+                                               <input type="date" id="date" name="date" class="col-lg-5"value="{{$service->date}}" />
+                                           </div>
+                                           <br />
+                                           <div class="col-lg-12"> <br />  </div>
+
+                                      <h4 style="font-weight:bold;">ข้อมูลเรื่องที่ขอรับบริการ</h4>
+                                      <hr />
+                                      <div class="col-lg-12"> <br />  </div>
+
+                                      <div class="form-group col-lg-6">
+                                            <label>ประเภท/ลักษณะงานที่มาขอรับบริการ</label>
+                                            {!! Form::select('cat', ['0'=>''] + $dd, null, ['class' => 'form-control datar']) !!}
+                            		   	 </div>
+
+                                     <div class="form-group col-lg-6">
+                                           <label>สถานะการดำเนินการ</label>
+                                           <input class="form-control" name="process" id="process" value="{{$service->process}}" type="text" placeholder="">
+                                    </div>
+                                       <div class="col-lg-12">
+                                       <h4 style="font-weight:bold;">ข้อมูลผู้ขอเข้ารับบริการ</h4>
+                                       <hr />
+                                       </div>
+                                       <div class="col-lg-12"> <br />  </div>
+
+
+                                    <label class="col-lg-2">เลขบัตรประชาชนประจำตัว</label>
+                                          <input type="text"  id="id_p" name="id_p" class="col-lg-2"  value="{{$ser->id_p}}"/>
+                                          <div class="col-lg-2" >
+                                            <button  value="ตรวจสอบ" id="ck_id" type="button" ><i >ตรวจสอบ</i></button>
+                                          </div>
+
+                                       <div class="col-lg-6">
+                                           <label>บัตรหมดอายุวันที่</label>
+                                           <input type="date"  id="id_exp" name="id_exp" value="{{$ser->id_exp}}"  @if($ser->id_exp=='ตลอดชีวิต')  disabled="disabled"@endif/>&nbsp;&nbsp;
+                                           <input type="checkbox" id="id_exp1" name="id_exp"  value="ตลอดชีวิต" @if($ser->id_exp=='ตลอดชีวิต')  checked="checked"@endif/>
+                                           <span>ตลอดชีวิต</span>
+                                       </div>
+                                       <div class="col-lg-12"> <br />  </div>
+
+                                       <label class="col-lg-2">คำนำหน้าชื่อ</label>
+                                       <div class="col-lg-10">
+                                       <input type="radio" class="prefix" id="prefix" name="prefix" value="นาย"  @if($ser->prefix=='นาย')checked="checked"@endif/><span> นาย&nbsp;&nbsp;</span>
+                                       <input type="radio" class="prefix" id="prefix" name="prefix" value="นาง" @if($ser->prefix=='นาง')checked="checked"@endif/><span> นาง&nbsp;&nbsp;</span>
+                                       <input type="radio" class="prefix" id="prefix" name="prefix" value="นางสาว" @if($ser->prefix=='นางสาว')checked="checked"@endif/><span> นางสาว&nbsp;&nbsp;</span>
+                                       @if($ser->prefix=='' )
+                                       <input type="radio" id="prefix1" name="prefix"  /><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="prefix11" name="prefix" disabled/>
+                                       @elseif($ser->prefix!='นางสาว' && $ser->prefix!='นาง' && $ser->prefix!='นาย')
+                                       <input type="radio" id="prefix1" name="prefix" checked="checked" /><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="prefix11" name="prefix" value="{{$ser->prefix}}"/>
+                                       @endif
+                                       </div>
+                                       <div class="col-lg-12"> <br />  </div>
+
+                                       <label class="col-lg-2 ">ชื่อ</label>
+                                       <input type="text" class="col-lg-2" id="name" name="name" value="{{$ser->name}}" />
+                                       <label  class="col-lg-2 text-right">นามสกุล</label>
+                                       <input type="text" class="col-lg-2" id="surename" name="surename" value="{{$ser->surename}}" />
+                                       <label class="col-lg-2 text-right">วันเกิด</label>
+                                       <input type="date" class="col-lg-2" id="dob" name="dob" value="{{$ser->dob}}"/>
+                                       <div class="col-lg-12"> <br />  </div>
+
+
+                                       <label class="col-lg-12 " style="color:blue">ที่อยู่ปัจจุบัน</label>
+                                       <div class="col-lg-12"> <br />  </div>
+                                       <label class="col-lg-2 ">บ้านเลขที่</label>
+                                       <input type="text" class="col-lg-2" id="house_number" name="address" value="{{$ser->address}}" />
+                                       <label  class="col-lg-2 text-right">หมู่บ้าน/อาคาร</label>
+                                       <input type="text" class="col-lg-2" id="village" name="village" value="{{$ser->village}}"/>
+                                       <label class="col-lg-2 text-right">เลขที่ห้อง</label>
+                                       <input type="text" class="col-lg-2"  id="room_number" name="room_number" value="{{$ser->room_number}}"/>
+                                       <div class="col-lg-12"> <br />  </div>
+
+                                       <label  class="col-lg-2">ชั้น</label>
+                                       <input type="text" class="col-lg-2" id="room_floor" name="room_floor" value="{{$ser->room_floor}}"/>
+                                       <label class="col-lg-2 text-right">หมู่ที่</label>
+                                       <input type="text" class="col-lg-2" id="bloc" name="group_home" value="{{$ser->group_home}}"/>
+                                       <label  class="col-lg-2 text-right">ซอย</label>
+                                       <input type="text" class="col-lg-2" id="allet" name="alley" value="{{$ser->alley}}"/>
+                                       <div class="col-lg-12"> <br />  </div>
+
+                                       <label class="col-lg-2 ">ถนน</label>
+                                       <input type="text" class="col-lg-2" id="road" name="road" value="{{$ser->road}}"/>
+                                       <label  class="col-lg-2 text-right">ตำบล/แขวง</label>
+                                       <input type="text" class="col-lg-2" id="local" name="local" value="{{$ser->local}}" />
+                                       <label class="col-lg-2 text-right">อำเภอ/เขต</label>
+                                       <input type="text" class="col-lg-2" id="district" name="district" value="{{$ser->district}}"/>
+                                        <div class="col-lg-12"> <br />  </div>
+
+
+                                       <label  class="col-lg-2 ">จังหวัด</label>
+                                       <input type="text" class="col-lg-2" id="province" name="province" value="{{$ser->province}}" />
+                                       <label class="col-lg-2 text-right">รหัสไปรษณีย์</label>
+                                       <input type="text" class="col-lg-2" id="zip_code" name="zip_code" value="{{$ser->zip_code}}" />
+                                       <label  class="col-lg-2 text-right">โทรศัพท์</label>
+                                       <input type="text" class="col-lg-2" id="phone" name="phone" value="{{$ser->phone}}" />
+                                       <div class="col-lg-12"> <br />  </div>
+
+                                       <label class="col-lg-2 " style="color:blue">ที่อยู่ตามทะเบียนบ้าน</label>
+                                       <div class="col-lg-10">
+                                       <input type="radio" id="check_live" class="check_live" name="check_live" value="ที่เดี่ยวกับบัตรประชาชน" @if($service->check_live=='ที่เดี่ยวกับบัตรประชาชน')checked="checked"@endif/><span> ที่เดี่ยวกับบัตรประชาชน&nbsp;&nbsp;</span>
+                                       <input type="radio" id="check_live_0" name="check_live" value="ที่เดียวกับที่ปัจจุบัน" @if($service->check_live=='ที่เดียวกับที่ปัจจุบัน')checked="checked"@endif/><span> ที่เดียวกับที่ปัจจุบัน&nbsp;&nbsp;</span>
+                                       <input type="radio" id="check_live" class="check_live"name="check_live" value="อื่นๆ" @if($service->check_live=='อื่นๆ')checked="checked"@endif/><span> อื่นๆ&nbsp;&nbsp;</span>
+                                       </div>
+
+
+
+                                       <div id="change">
+
+
+
+                                       <div class="col-lg-12"> <br />  </div>
+                                       <label class="col-lg-2 ">บ้านเลขที่</label>
+                                       <input type="text" class="col-lg-2" id="house_number" name="address1" value="{{$ser1->address}}" />
+                                       <label  class="col-lg-2 text-right">หมู่บ้าน/อาคาร</label>
+                                       <input type="text" class="col-lg-2" id="village" name="village1" value="{{$ser1->village}}"/>
+                                       <label class="col-lg-2 text-right">เลขที่ห้อง</label>
+                                       <input type="text" class="col-lg-2"  id="room_number" name="room_number1" value="{{$ser1->room_number}}"/>
+                                       <div class="col-lg-12"> <br />  </div>
+
+                                       <label  class="col-lg-2">ชั้น</label>
+                                       <input type="text" class="col-lg-2" id="room_floor" name="room_floor1" value="{{$ser1->room_floor}}"/>
+                                       <label class="col-lg-2 text-right">หมู่ที่</label>
+                                       <input type="text" class="col-lg-2" id="bloc" name="group_home1" value="{{$ser1->group_home}}"/>
+                                       <label  class="col-lg-2 text-right">ซอย</label>
+                                       <input type="text" class="col-lg-2" id="allet" name="alley1" value="{{$ser1->alley}}"/>
+                                       <div class="col-lg-12"> <br />  </div>
+
+                                       <label class="col-lg-2 ">ถนน</label>
+                                       <input type="text" class="col-lg-2" id="road" name="road1" value="{{$ser1->road}}"/>
+                                       <label  class="col-lg-2 text-right">ตำบล/แขวง</label>
+                                       <input type="text" class="col-lg-2" id="local" name="local1" value="{{$ser1->local}}" />
+                                       <label class="col-lg-2 text-right">อำเภอ/เขต</label>
+                                       <input type="text" class="col-lg-2" id="district" name="district1" value="{{$ser1->district}}"/>
+                                        <div class="col-lg-12"> <br />  </div>
+
+
+                                       <label  class="col-lg-2 ">จังหวัด</label>
+                                       <input type="text" class="col-lg-2" id="province" name="province1" value="{{$ser1->province}}" />
+                                       <label class="col-lg-2 text-right">รหัสไปรษณีย์</label>
+                                       <input type="text" class="col-lg-2" id="zip_code" name="zip_code1" value="{{$ser1->zip_code}}" />
+                                       <label  class="col-lg-2 text-right">โทรศัพท์</label>
+                                       <input type="text" class="col-lg-2" id="phone" name="phone1" value="{{$ser1->phone}}" />
+                                       <div class="col-lg-12"> <br />  </div>
+
+
+
+                                       </div>
+
+
+
+                                       <div class="col-lg-12"> <br />  </div>
+                                       <label class="col-lg-2">ประเภทที่อยู่</label>
+                                       <div class="col-lg-10">
+                                       <input type="radio" class="live_cate" id="live_cate" name="live_cate" value="บ้าน" @if($service->live_cate=='บ้าน')checked="checked"@endif/><span> บ้าน&nbsp;&nbsp;</span>
+                                       <input type="radio" class="live_cate" id="live_cate" name="live_cate" value="ทาวน์เฮาส์" @if($service->live_cate=='ทาวน์เฮาส์')checked="checked"@endif/><span> ทาวน์เฮาส์&nbsp;&nbsp;</span>
+                                       <input type="radio" class="live_cate" id="live_cate" name="live_cate" value="คอนโดมิเนียม" @if($service->live_cate=='คอนโดมิเนียม')checked="checked"@endif/><span> คอนโดมิเนียม&nbsp;&nbsp;</span>
+                                       <input type="radio" class="live_cate" id="live_cate" name="live_cate" value="อพาร์ทเม้นท์หอพักแฟลต" @if($service->live_cate=='อพาร์ทเม้นท์หอพักแฟลต')checked="checked"@endif/><span> อพาร์ทเม้นท์/หอพัก/แฟลต&nbsp;&nbsp;</span>
+                                       @if($service->live_cate=='' )
+                                       <input type="radio"  id="live_cate1" name="live_cate"  /><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_cate11" name="live_cate" disabled/>
+                                       @elseif($service->live_cate!='บ้าน' && $service->live_cate!='ทาวน์เฮาส์' && $service->live_cate!='คอนโดมิเนียม' && $service->live_cate!='อพาร์ทเม้นท์หอพักแฟลต')
+                                       <input type="radio"  id="live_cate1" name="live_cate"  checked="checked" /><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_cate11" name="live_cate" value="{{$service->live_cate}}" />
+                                       @endif
+                                       </div>
+                                       <div class="col-lg-12"> <br />  </div>
+
+                                       <label class="col-lg-2">สถานะการอยู่อาศัย</label>
+                                       <div class="col-lg-10">
+                                        @if($service->c_live_status== 1 )
+                                       <input type="radio"  class="c" id="live_status1" name="live_status" value="1" checked="checked"/><span> เช่า&nbsp;</span><input type="text" id="live_status12" name="c_live_status" value="{{$service->c_live_status}}"/> บาท/เดือน&nbsp;&nbsp;
+                                       @else
+                                       <input type="radio"  class="c" id="live_status1" name="live_status"  value="1"/><span> เช่า&nbsp;</span><input type="text" id="live_status12" name="c_live_status" disabled/> บาท/เดือน&nbsp;&nbsp;
+                                       @endif
+                                       @if($service->c_live_status== 2 )
+                                       <input type="radio"  class="c" id="live_status11" name="live_status" value="2" checked="checked"/><span> ผ่อน&nbsp;</span><input type="text" id="live_status13" name="c_live_status"  value="{{$service->c_live_status}}"/> บาท/เดือน&nbsp;&nbsp;
+                                       @else
+                                       <input type="radio"  class="c" id="live_status11" name="live_status" value="2" /><span> ผ่อน&nbsp;</span><input type="text" id="live_status13" name="c_live_status" disabled/> บาท/เดือน&nbsp;&nbsp;
+                                       @endif
+                                       <input type="radio" class='live_status' id="live_status" name="live_status" value="เป็นของตนเองปลอดภาระ" @if($service->live_status=='เป็นของตนเองปลอดภาระ')checked="checked"@endif/><span> เป็นของตนเองปลอดภาระ&nbsp;&nbsp;</span>
+                                       <input type="radio" class='live_status' id="live_status" name="live_status" value="เป็นของตนเองปลอดภาระ" @if($service->live_status=='เป็นของตนเองปลอดภาระ')checked="checked"@endif/><span> เป็นของตนเองปลอดภาระ&nbsp;&nbsp;</span>
+                                       </div>
+                                       <div class="col-lg-12"> <br />  </div>
+                                       <div class="col-lg-2"></div>
+                                       <div class="col-lg-10">
+                                         <input type="radio" class='live_status' id="live_status" name="live_status" value="เป็นของบุคคลอื่น" @if($service->live_status=='เป็นของบุคคลอื่น')checked="checked"@endif/><span> เป็นของบุคคลอื่น&nbsp;&nbsp;</span>
+                                         <input type="radio" class='live_status' id="live_status" name="live_status" value="อาศัยอยู่กับบุตรหลานญาติ" @if($service->live_status=='อาศัยอยู่กับบุตรหลานญาติ')checked="checked"@endif/><span> อาศัยอยู่กับบุตรหลาน/ญาติ&nbsp;&nbsp;</span>
+                                         <input type="radio" class='live_status' id="live_status" name="live_status" value="บ้านพักสวัสดิการ" @if($service->live_status=='บ้านพักสวัสดิการ')checked="checked"@endif/><span> บ้านพักสวัสดิการ&nbsp;&nbsp;</span>
+                                         @if($service->c_live_status== 3 )
+                                         <input type="radio"  class="c" id="live_status111" name="live_status" checked="checked" value="3"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status14" name="c_live_status" value="{{$service->c_live_status}}"/>
+                                         @else
+                                         <input type="radio"  class="c" id="live_status111" name="live_status" value="3"/><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text" id="live_status14" name="c_live_status" disabled/>
+                                         @endif
+                                       </div>
+                                       <div class="col-lg-12"> <br />  </div>
+
+                                       <label class="col-lg-2">สถานภาพ</label>
+                                       <div class="col-lg-10">
+                                       <input type="radio" id="s_status" name="m_status"  value="โสด" @if($service->m_status=='โสด')checked="checked"@endif/> <span> โสด&nbsp;&nbsp;</span>
+                                       <input type="radio" id="m_status" name="m_status"  class="ck_s" value="สมรส" @if($service->m_status=='สมรส')checked="checked"@endif/> <span> สมรส&nbsp;</span>
+                                       <input type="radio" id="m_status" name="m_status"  class="ck_s" value="อยู่ด้วยกันโดยไม่จดทะเบียนสมรส" @if($service->m_status=='อยู่ด้วยกันโดยไม่จดทะเบียนสมรส')checked="checked"@endif/><span> อยู่ด้วยกันโดยไม่จดทะเบียนสมรส&nbsp;&nbsp;</span>
+                                       <input type="radio" id="m_status" name="m_status"  class="ck_s" value="หย่าร้าง" @if($service->m_status=='หย่าร้าง')checked="checked"@endif/><span> หย่าร้าง&nbsp;&nbsp;</span>
+                                       <input type="radio" id="m_status" name="m_status"  class="ck_s" value="หม้าย" @if($service->m_status=='หม้าย')checked="checked"@endif/><span> หม้าย&nbsp;&nbsp;</span>
+                                       </div>
+                                       <div class="col-lg-12"> <br />  </div>
+
+                                        <div id="s">
+
+
+                                       <div class="col-lg-6">
+                                           <label>เลขบัตรประชาชนประจำตัว</label>
+                                           <input type="text" id="id_p1" name="id_p1" value="{{$ser1->id_p}}" />                                       </div>
+                                       <div class="col-lg-6">
+                                           <label>บัตรหมดอายุวันที่</label>
+                                           <input type="date"  id="id_exp3" name="id_exp1" value="{{$ser1->id_exp}}"@if($ser1->id_exp=='ตลอดชีวิต')  disabled="disabled"@endif/>&nbsp;&nbsp;
+                                           <input type="checkbox" id="id_exp2" name="id_exp1"  value="ตลอดชีวิต" @if($ser1->id_exp=='ตลอดชีวิต')  checked="checked"@endif/>
+                                           <span>ตลอดชีวิต</span>
+
+                                       </div>
+                                       <div class="col-lg-12"> <br />  </div>
+
+
+                                       <label class="col-lg-2">คำนำหน้าชื่อ</label>
+                                       <div class="col-lg-10">
+                                       <input type="radio"  class='check' id="prefix1" name="prefix1" value="นาย" @if($ser1->prefix=='นาย')checked="checked"@endif/><span> นาย&nbsp;&nbsp;</span>
+                                       <input type="radio"  class='check' id="prefix1" name="prefix1" value="นาง" @if($ser1->prefix=='นาง')checked="checked"@endif/><span> นาง&nbsp;&nbsp;</span>
+                                       <input type="radio"  class='check' id="prefix1" name="prefix1" value="นางสาว" @if($ser1->prefix=='นางสาว')checked="checked"@endif/><span> นางสาว&nbsp;&nbsp;</span>
+                                       @if($ser1->prefix=='' )
+                                         <input type="radio"  class='checked' id="prefix12" name="prefix1"  /><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text"  id="prefix123" name="prefix1"  class='checkedinput' disabled />
+                                       @elseif($ser1->prefix!='นางสาว' && $ser1->prefix!='นาง' && $ser1->prefix!='นาย')
+                                         <input type="radio"  class='checked' id="prefix12" name="prefix1" checked="checked" /><span> อื่นๆ&nbsp;&nbsp;</span>    <input type="text"  id="prefix123" name="prefix1"  class='checkedinput' value="{{$ser1->prefix}}"  />
+                                       @endif
+                                       </div>
+                                       <div class="col-lg-12"> <br />  </div>
+
+                                       <label class="col-lg-2 ">สามีหรือภรรยาชื่อ</label>
+                                       <input type="text" class="col-lg-3" id="name1" name="name1" value="{{$ser1->name}}" />
+                                       <label  class="col-lg-2 text-right">นามสกุล</label>
+                                       <div class="col-lg-5">
+                                       <input type="text" class="col-lg-8" id="surename1" name="surename1" value="{{$ser1->surename}}" />
+                                       </div>
+                                       <div class="col-lg-12"> <br />  </div>
+
+                                       <label class="col-lg-2 ">อาชีพปัจจุบัน</label>
+                                       <input type="text" class="col-lg-3" id="job" name="job" value="{{$ser1->job}}" />
+                                       <label  class="col-lg-2 text-right">รายได้/เดือน</label>
+                                       <div class="col-lg-5">
+                                       <input type="text" class="col-lg-8" id="income" name="income" value="{{$ser1->income}}" />
+                                       </div>
+
+                                        </div>
+
+                                       <div class="col-lg-12"> <br />  </div>
+
+
+                                 {!! Form::hidden('category', null,['id' => 'category']) !!}
+
+
+
+                                      <div class="form-group col-lg-12" >
+                                        <button type="button" id="reset" class="btn btn-danger" >ค่าเริ่มต้น</button>
+                                        {!! Form::button('บันทึก',['type'=>'submit','class'=>'btn btn-primary','id'=>'add1']) !!}
+                                      </div>
+
+
+                                    {!! Form::close() !!}
+
+
+                                   </div>
+                                   <!-- /.panel-body -->
+                                    @if($errors->any())
+                                    <ul class="alert alert-danger">
+                                    @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                    </ul>
+                                    @endif
+                               </div>
+                               <!-- /.panel -->
+                           </div>
+                           <!-- /.col-lg-12 -->
+                       </div>
+                       <!-- /.row -->
+
+                   </div>
+                   <!-- /#page-wrapper -->
+
+               </div>
+               <!-- /#wrapper -->
+<script src="{{asset('/assets/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script>
+    $(document).ready(function() {
+        //alert('aa');
+                 $('.panel-body').find('input, textarea, button, select').attr('disabled','disabled');
+
+                 $('.check').on('click',function(){
+              $(".checkedinput").val('');
+              $(".checkedinput").prop('disabled', true);
+          });
+          $('.checked').on('click',function(){
+              $(".checkedinput").prop('disabled', false);
+          });
+        $('#id_exp1').on('click',function(){
+             if ($("#id_exp").prop("disabled")){
+              $("#id_exp").prop('disabled', false);
+              }else{
+              $("#id_exp").val('');
+              $("#id_exp").prop('disabled', true);
+              }
+          });
+           $('#id_exp2').on('click',function(){
+             if ($("#id_exp2").prop("disabled")){
+              $("#id_exp3").prop('disabled', false);
+              }else{
+              $("#id_exp3").val('');
+              $("#id_exp3").prop('disabled', true);
+              }
+          });
+           $('#live_status1').on('click',function(){
+            //  $('.c').val(1);
+              $("#live_status12").prop('disabled', false);
+              $("#live_status14").prop('disabled', true);
+              $("#live_status14").val('');
+              $("#live_status13").prop('disabled', true);
+              $("#live_status13").val('');
+          });
+          $('#live_status11').on('click',function(){
+              //$('.c').val(2);
+              $("#live_status13").prop('disabled', false);
+              $("#live_status12").prop('disabled', true);
+              $("#live_status14").prop('disabled', true);
+              $("#live_status14").val('');
+              $("#live_status12").val('');
+          });
+           $('#live_status111').on('click',function(){
+             // $('.c').val(3);
+              $("#live_status14").prop('disabled', false);
+              $("#live_status13").prop('disabled', true);
+              $("#live_status13").val('');
+              $("#live_status12").prop('disabled', true);
+              $("#live_status12").val('');
+          });
+          $('.live_status').on('click',function(){
+             // $('.c').val($(this).val());
+              $("#live_status14").prop('disabled', true);
+              $("#live_status14").val('');
+              $("#live_status13").prop('disabled', true);
+              $("#live_status13").val('');
+              $("#live_status12").prop('disabled', true);
+              $("#live_status12").val('');
+          });
+
+           $('#live_cate1').on('click',function(){
+              $("#live_cate11").prop('disabled', false);
+          });
+           $('.live_cate').on('click',function(){
+              $("#live_cate11").val('');
+              $("#live_cate11").prop('disabled', true);
+          });
+
+          $('#prefix1').on('click',function(){
+              $("#prefix11").prop('disabled', false);
+          });
+           $('.prefix').on('click',function(){
+              $("#prefix11").val('');
+              $("#prefix11").prop('disabled', true);
+          });
+
+           $('#add1').click(function () {
+              $('#category').val(1);
+        });
+
+
+               var val = '<?php echo $service->check_live ;?>';
+        if(val =='ที่เดียวกับที่ปัจจุบัน'){
+        $('#change').hide();
+        }
+
+
+        $('#check_live_0').on('click',function(){
+           $('#change').hide();
+         });
+
+         $('.check_live').on('click',function(){
+            $('#change').show();
+        });
+
+       $('#s_status').on('click',function(){
+           $('#s').hide();
+         });
+
+         $('.ck_s').on('click',function(){
+            $('#s').show();
+        });
+
+
+
+    });
+
+</script>
+@stop
